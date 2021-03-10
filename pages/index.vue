@@ -1,78 +1,63 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+        <h1 class="h-welcome">Selamat Datang,</h1>
+        <p></p>
+        <h4 class="sb-welcome">Anda berada di halaman Reservasi Kunjungan <b>Jabar Command Center</b>.
+        Anda dapat mengajukan permohonan kunjungan dengan mengisi data diri 
+        pada <b>Form Permohonan Kunjungan</b>, atau mengecek status permohonan anda 
+        pada halaman <b>Cek Status Permohonan.</b></h4>
+       <p></p>
+       <h4 class="qs-welcome">Apa yang ingin anda lakukan ?</h4>
     </v-col>
+    <v-col cols="12" sm="12" md="12">
+    </v-col>
+    <v-col cols="12" sm="8" md="6" class="ajukan-permohonan">
+         <v-card
+          class="mx-auto card-ajukan"
+          color="#E6E6E6"
+          max-width="344"
+          height="150"
+          outlined
+        >
+          <v-list-item three-line>
+            <v-avatar class="avatar-home" color="blue darken-2">
+              <v-icon x-large dark>
+                mdi-account-plus
+              </v-icon>
+            </v-avatar>
+            <v-list-item-content class="avatar-content">
+              <v-list-item-subtitle class="ajukan-title">
+                <nuxt-link class="link-reservasi" to="reservasi">Ajukan Permohonan Kunjungan</nuxt-link>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+    </v-col>
+
+   <v-col cols="12" sm="8" md="6" class="cek-permohonan">
+         <v-card
+          class="mx-auto card-ajukan"
+          color="#E6E6E6"
+          max-width="344"
+          height="150"
+          outlined
+        >
+          <v-list-item three-line>
+            <v-avatar class="avatar-home" color="blue darken-2">
+              <v-icon x-large dark>
+                mdi-account-check
+              </v-icon>
+            </v-avatar>
+            <v-list-item-content class="avatar-content">
+              <v-list-item-subtitle class="ajukan-title">
+                <a>Cek Status Permohonan</a>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+    </v-col>
+    
   </v-row>
 </template>
 

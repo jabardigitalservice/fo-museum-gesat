@@ -3,16 +3,14 @@
     <v-app-bar
       fixed
       app
-      class="brand-light"
     >
       <v-spacer></v-spacer>
-      <v-img src="/logojcc.png" alt="Jabar Command Center"
-      max-height="150" max-width="250"/>
+      <nuxt-link to="/">
+        <v-img src="/logojcc.png" alt="Jabar Command Center"
+        max-height="150" max-width="250"/>
+      </nuxt-link>
       <v-spacer />
     </v-app-bar>
-    <!-- <div class="overflow-hidden h-1 text-xs flex rounded bg-brand-green-light">
-      <div class="shadow-none flex flex-col text-center text-white justify-center bg-brand-green" style="width: 0%;"></div>
-    </div>   -->
     <v-main>
       <v-container>
         <nuxt />

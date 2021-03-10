@@ -1,0 +1,79 @@
+@media (min-width: 960px) {
+    .col-md-6.ajukan-permohonan{
+        padding-left: 250px;
+    }
+    .col-md-6.cek-permohonan{
+        padding-right: 250px;
+    }
+    .h-welcome {
+        margin-top: 100px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .col-md-6.ajukan-permohonan{
+        padding-left: 370px;
+    }
+    .col-md-6.cek-permohonan{
+        padding-right: 370px;
+    }
+}
+
+@media (max-width: 960px) {
+    .h-welcome {
+        margin-top: 50px;
+    }
+}
+
+.v-text-field.jumlah-peserta{
+    width: 200px;
+}
+
+.btn-batalkan {
+    text-decoration: none;
+}
+
+.sb-welcome {
+    font-weight: 400;
+    font-style:normal;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.qs-welcome {
+    margin-top: 40px;
+}
+
+.ajukan-title {
+    color:rgb(26 152 213) !important;
+    font-size: 16px;
+}
+
+.avatar-home {
+    margin-left: 20px;
+    padding: 30px;
+}
+
+.avatar-content {
+    margin-left: 10px;
+}
+
+.card-ajukan {
+    padding-top: 30px;
+}
+
+.link-reservasi {
+    text-decoration: none;
+}
+
+.sbform-header {
+    font-weight: 400;
+}
+
+.bform-header {
+    font-size: 30px;
+}
+
+.pt-8 {
+    padding-top: 80px
+}

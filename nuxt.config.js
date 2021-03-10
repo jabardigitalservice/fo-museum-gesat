@@ -4,7 +4,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - reservasi-commandcenter-microsite',
-    title: 'reservasi-commandcenter-microsite',
+    title: 'Reservasi Command Center Microsite',
     htmlAttrs: {
       lang: 'en'
     },
@@ -20,6 +20,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
