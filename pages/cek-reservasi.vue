@@ -6,12 +6,20 @@
     <v-form @submit="onFormSubmit" class="cek_reservasi__form">
       <label class="cek-reservasi__form__label">Kode Reservasi </label>
       <div class="cek-reservasi__form__input-group">
-        <v-text-field type="text" v-model="reservationCode" :rules="rules" placeholder="contoh: JCC0000000001" />
+        <v-text-field
+          type="text"
+          v-model="reservationCode"
+          :rules="rules"
+          placeholder="contoh: JCC0000000001"
+        />
         <v-btn color="primary" large :loading="loading" type="submit"
           >Cek Status</v-btn
         >
       </div>
     </v-form>
+    <section v-if="showReservationInfo">
+      <ReservationInfoTable :reservationInfo="cleanData" />
+    </section>
   </div>
 </template>
 
@@ -56,31 +64,20 @@ export default {
       } catch (error) {
         console.error(error);
         this.loading = false;
-        this.showReservationInfo = true;
+        this.showReservationInfo = false;
       }
     },
   },
   computed: {
-    formatedDate() {
-      const date = new Date(this.reservationInfo.reservation_date);
-      return date.toLocaleDateString("id-ID", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    },
-
-    formatedStatus() {
-      switch (this.reservationInfo.approval_status) {
-        case "already_approved":
-          return "Diterima";
-
-        case "rejected":
-          return "Ditolak";
-
-        default:
-          return "Sedang Diproses";
-      }
+    cleanData() {
+      return {
+        reservation_code: this.reservationInfo.reservation_code,
+        name: this.reservationInfo.name,
+        organization_name: this.reservationInfo.organization_name,
+        reservation_date: this.reservationInfo.reservation_date,
+        shift: this.reservationInfo.shift,
+        approval_status: this.reservationInfo.approval_status,
+      };
     },
   },
 };
@@ -103,7 +100,8 @@ export default {
   line-height: 180%;
 }
 
-.cek-reservasi__form__input-group{
+.cek-reservasi__form__input-group {
   display: flex;
+  margin-bottom: 40px;
 }
 </style>
