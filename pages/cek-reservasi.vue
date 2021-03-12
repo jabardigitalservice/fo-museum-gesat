@@ -1,14 +1,11 @@
 <template>
-  <main>
+  <v-main>
     <h1>Cek Permohonan Reservasi Jabar Command Center</h1>
-    <form @submit="onFormSubmit">
-      <div class="form-group">
-        <label> Kode Reservasi </label>
-        <input type="text" v-model="reservationCode" />
-      </div>
-      <button type="submit" class="button">Cek Status</button>
-    </form>
-    <p v-if="validationMessage">{{ validationMessage }}</p>
+    <v-form @submit="onFormSubmit">
+      <label>Kode Reservasi </label>
+      <v-text-field type="text" v-model="reservationCode" :rules="rules" />
+      <v-btn color="primary" large :loading="loading" type="submit">Cek Status</v-btn>
+    </v-form>
     <div v-if="error">
       <p>Mohon Maaf, Kode Reservasi tidak ditemukan</p>
     </div>
@@ -20,7 +17,7 @@
       <p>Waktu Kunjungan : {{ reservationInfo.shift }}</p>
       <p>Status Permohonan : {{ formatedStatus }}</p>
     </div>
-  </main>
+  </v-main>
 </template>
 
 <script>
@@ -30,26 +27,27 @@ export default {
       reservationCode: "",
       reservationInfo: {},
       showReservationInfo: false,
-      validationMessage: "",
+      loading: false,
       error: false,
+      rules: [
+        (code) => !!code || "Kode Reservasi tidak boleh kosong",
+        (code) =>
+          code.length <= 13 ||
+          "Kode Reservasi tidak boleh melebihi 13 karakter",
+      ],
     };
   },
   methods: {
     onFormSubmit(e) {
       e.preventDefault();
-      if (this.formIsValid()) {
+      if (this.formIsValid) {
+        this.loading = true;
         this.getReservationInfo(this.reservationCode);
       }
     },
 
     formIsValid() {
-      if (!this.reservationCode) {
-        this.validationMessage = "Kode reservasi tidak boleh kosong";
-        return false;
-      } else {
-        this.validationMessage = "";
-        return true;
-      }
+      return this.$refs.form.validate();
     },
 
     async getReservationInfo(code) {
@@ -58,9 +56,11 @@ export default {
           `https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io/api/command-center-reservation?keyword=${code}&by=reservation_code`
         );
         this.reservationInfo = { ...res.data[0] };
+        this.loading=false;
         this.showReservationInfo = true;
       } catch (error) {
         console.error(error);
+        this.loading=false;
         this.showReservationInfo = true;
       }
     },
@@ -92,18 +92,4 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  padding: 8px 16px;
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: blue;
-  border: none;
-}
-
-form {
-  display: flex;
-}
 </style>
