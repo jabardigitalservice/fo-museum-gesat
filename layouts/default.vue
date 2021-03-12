@@ -16,13 +16,6 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-footer
-      class="footer"
-      :absolute="!fixed"
-      app
-    >
-      <span>{{ footerText }} &copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 

@@ -9,6 +9,7 @@
             <div class="pt-8"></div>
             <v-form
                 ref="form"
+                v-on:submit.prevent="submitData()"
                 v-model="valid"
                 lazy-validation
             >
@@ -82,7 +83,7 @@
                         persistent-hint
                         prepend-icon="mdi-calendar"
                         v-bind="attrs"
-                        @blur="tanggalKunjungan = parseDate(dateFormatted)"
+                        @blur="tanggalKunjungan = parseDate()"
                         v-on="on"
                         ></v-text-field>
                     </template>
@@ -109,13 +110,13 @@
 
                 <v-checkbox
                 v-model="checkbox"
-                :rules="[v => !!v || 'You must agree to continue!']"
+                :rules="[v => !!v || 'Kamu harus menyetujui syarat dan ketentuan yang berlaku!']"
                 label="Saya menyatakan bahwa saya menyetujui 
                 syarat dan ketentuan yang berlaku."
                 required
                 ></v-checkbox>
                 
-                <v-btn block color="success" @click="submit" :disabled="!valid">
+                <v-btn block color="success" type="submit" :disabled="!valid">
                   Kirim Permohonan
                 </v-btn>
                 <p></p>
@@ -147,7 +148,8 @@ export default {
       ],
       nik : '',
       nikRules : [
-        v => !!v || "NIK wajib diisi"
+        v => !!v || "NIK wajib diisi",
+        v => /^.{16,16}$/.test(v) || 'NIK minimal 16 digit'
       ],
       requirednikRules : [
         v => /[0-9]+$/.test(v) || 'NIK tidak boleh mengandung huruf'
@@ -230,18 +232,69 @@ export default {
         const [year, month, day] = date.split('-')
         return `${month}/${day}/${year}`
       },
-      parseDate (date) {
-        if (!date) return null
-
-        const [month, day, year] = date.split('/')
+      parseDate () {
+        var date = new Date().toISOString().substr(0, 10)
+        var dateFormatted = this.formatDate(date)
+        const [month, day, year] = dateFormatted.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
       },
-      submit() {
-        console.log(this)
-        if (this.valid == true) { 
-          alert('submit')
-        }
-      }
+      async submitData () {
+          if (this.$refs.form.validate()) {
+            try {
+              var postData    = []
+              var app         = this;
+
+              postData.push(
+                  {
+                      'name'              : app.nama,
+                      'nik'               : app.nik,
+                      'organization_name' : app.organisasi,
+                      'address'           : app.alamatOrganisasi,
+                      'phone_number'      : app.notlp,
+                      'email'             : app.email,
+                      'purpose'           : app.maksudTujuanKunjungan,
+                      'visitors'          : app.jumlahPeserta,
+                      'reservation_date'  : app.tanggalKunjungan,
+                      'shift'             : 1,
+                  }
+              );
+              await this.$axios.post(`command-center-reservation`, postData[0])
+                  alert('masuk')
+              } catch (e) {
+              
+              }
+          }
+      },
+      // submitData() {
+      //   var app = this;
+      //   if (this.$refs.form.validate()) {
+      //     var urlBase     = '/api/command-center-reservation';
+      //     var postData    = []
+      //     postData.push(
+      //         {
+      //             'name'        : app.nama,
+      //             // 'nik'         : app.nik,
+      //             // 'organization_name'    : app.passport,
+      //             // 'address'         : app.tlp,
+      //             // 'phone_number'          : app.kk,
+      //             // 'email'       : app.email,
+      //             // 'purpose'      : app.alamat,
+      //             // 'visitors'         : this.$refs.ktp.value,
+      //             // 'reservation_date'        : this.$refs.visa.value,
+      //             // 'shift' : this.$refs.kartukuning.value,
+      //         }
+      //     );
+
+      //     axios.patch(urlBase, postData[0])
+      //       .then((resp) => {
+            
+      //       })
+      //       .catch((resp) =>{
+            
+      //       });
+
+      //   }
+      // },
     },
 }
 
