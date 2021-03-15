@@ -1,9 +1,10 @@
-@import 'variables';
+@import "variables";
 
 .cek-reservasi {
   margin-top: 50px;
   color: $color-text-default;
   font-weight: 600;
+  font-style: normal;
 
   &__title {
     padding: 0;
@@ -36,6 +37,19 @@
       font-weight: bold;
       text-decoration: none;
       color: $color-primary;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .cek-reservasi {
+    margin-top: 148px;
+    &__title {
+      font-size: 32px;
+      margin-bottom: 39px;
+    }
+    &__form__input-group {
+      margin-bottom: 63px;
     }
   }
 }

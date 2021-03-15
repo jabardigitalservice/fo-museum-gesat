@@ -1,7 +1,8 @@
 <template>
   <div class="cek-reservasi">
     <h1 class="cek-reservasi__title">
-      Cek Permohonan Reservasi Jabar Command Center
+      Cek Status Permohonan Reservasi
+      <wbr>Jabar Command Center</wbr>
     </h1>
     <v-form @submit="onFormSubmit" class="cek_reservasi__form">
       <label class="cek-reservasi__form__label">Kode Reservasi </label>
