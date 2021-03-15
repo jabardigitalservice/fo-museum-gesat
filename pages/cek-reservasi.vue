@@ -83,25 +83,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.cek-reservasi > .cek-reservasi__title {
-  padding: 0;
-  margin: 0;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 150%;
-  margin-bottom: 18px;
-}
-
-.cek-reservasi__form__label {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 180%;
-}
-
-.cek-reservasi__form__input-group {
-  display: flex;
-  margin-bottom: 40px;
-}
-</style>
