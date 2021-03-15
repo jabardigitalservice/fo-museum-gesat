@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { formatedDate } from "../utils/formatedDate";
 export default {
   data() {
     return {
@@ -96,7 +97,7 @@ export default {
         },
         {
           title: "Tanggal Kunjungan",
-          value: this.formatedDate,
+          value: formatedDate(this.reservationInfo.reservation_date),
         },
         {
           title: "Waktu Kunjungan",
@@ -108,15 +109,6 @@ export default {
           type: this.statusType,
         },
       ];
-    },
-
-    formatedDate() {
-      const date = new Date(this.reservationInfo.reservation_date);
-      return date.toLocaleDateString("id-ID", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
     },
 
     formatedStatus() {
