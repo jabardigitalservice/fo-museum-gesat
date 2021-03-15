@@ -8,9 +8,9 @@
         <li v-for="data in tableData" :key="data.title">
           <p class="info-table__body__title">{{ data.title }}</p>
           <div v-if="data.type">
-            <p class="info-table__body__subtitle">
-              {{ data.value }}
-            </p>
+            <v-chip :color="data.type.background" label :text-color="data.type.color"
+              >{{ data.value }}
+            </v-chip>
           </div>
           <div v-else>
             <p class="info-table__body__subtitle">
@@ -38,8 +38,6 @@ export default {
   computed: {
     formatedDate() {
       const date = new Date(this.reservationInfo.reservation_date);
-      console.log(this.reservationInfo);
-      console.log(date);
       return date.toLocaleDateString("id-ID", {
         year: "numeric",
         month: "long",

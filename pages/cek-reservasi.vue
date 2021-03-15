@@ -114,15 +114,27 @@ export default {
     formatedStatus() {
       switch (this.reservationInfo.approval_status) {
         case "already_approved":
-          this.statusType = "success";
+          this.statusType = {
+            status: "success",
+            background: "green",
+            color: "white",
+          };
           return "Diterima";
 
         case "rejected":
-          this.statusType = "warning";
+          this.statusType = {
+            status: "danger",
+            background: "red",
+            color: "white",
+          };
           return "Ditolak";
 
         default:
-          this.statusType = "error";
+          this.statusType = {
+            status: "warning",
+            background: "yellow",
+            color: "black",
+          };
           return "Sedang Diproses";
       }
     },
