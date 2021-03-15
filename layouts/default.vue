@@ -3,11 +3,12 @@
     <v-app-bar
       fixed
       app
+      class="nav-logo"
     >
       <v-spacer></v-spacer>
       <nuxt-link to="/">
-        <v-img src="/logojcc.png" alt="Jabar Command Center"
-        max-height="150" max-width="250"/>
+        <v-img src="/logojcc.svg" alt="Jabar Command Center"
+        max-height="80" max-width="80"/>
       </nuxt-link>
       <v-spacer />
     </v-app-bar>
