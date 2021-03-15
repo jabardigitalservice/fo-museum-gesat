@@ -19,7 +19,7 @@
       </div>
     </v-form>
     <section v-if="showReservationInfo">
-      <ReservationInfoTable :reservationInfo="cleanData" />
+      <InfoTable :tableData="cleanData" />
     </section>
     <p class="cek-reservasi__bantuan">
       Apabila anda mengalami kesulitan, silahkan menghubungi
@@ -43,6 +43,7 @@ export default {
       showReservationInfo: false,
       loading: false,
       error: false,
+      statusType: null,
       rules: [
         (code) => !!code || "Kode Reservasi tidak boleh kosong",
         (code) =>
@@ -73,7 +74,6 @@ export default {
         this.loading = false;
         this.showReservationInfo = true;
       } catch (error) {
-        console.error(error);
         this.loading = false;
         this.showReservationInfo = false;
       }
@@ -81,14 +81,58 @@ export default {
   },
   computed: {
     cleanData() {
-      return {
-        reservation_code: this.reservationInfo.reservation_code,
-        name: this.reservationInfo.name,
-        organization_name: this.reservationInfo.organization_name,
-        reservation_date: this.reservationInfo.reservation_date,
-        shift: this.reservationInfo.shift,
-        approval_status: this.reservationInfo.approval_status,
-      };
+      return [
+        {
+          title: "Kode Reservasi",
+          value: this.reservationInfo.reservation_code,
+        },
+        {
+          title: "Nama Penanggung Jawab",
+          value: this.reservationInfo.name,
+        },
+        {
+          title: "Asal Instansi",
+          value: this.reservationInfo.organization_name,
+        },
+        {
+          title: "Tanggal Kunjungan",
+          value: this.formatedDate,
+        },
+        {
+          title: "Waktu Kunjungan",
+          value: this.reservationInfo.shift,
+        },
+        {
+          title: "Status Permohonan",
+          value: this.formatedStatus,
+          type: this.statusType,
+        },
+      ];
+    },
+
+    formatedDate() {
+      const date = new Date(this.reservationInfo.reservation_date);
+      return date.toLocaleDateString("id-ID", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    },
+
+    formatedStatus() {
+      switch (this.reservationInfo.approval_status) {
+        case "already_approved":
+          this.statusType = "success";
+          return "Diterima";
+
+        case "rejected":
+          this.statusType = "warning";
+          return "Ditolak";
+
+        default:
+          this.statusType = "error";
+          return "Sedang Diproses";
+      }
     },
   },
 };

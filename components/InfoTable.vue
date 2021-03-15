@@ -1,55 +1,22 @@
 <template>
-  <article class="cek-reservasi__reservasi-info">
-    <section class="cek-reservasi__reservasi-info__header primary">
+  <article class="info-table">
+    <section class="info-table__header--bg-primary">
       <h2>Informasi Reservasi</h2>
     </section>
-    <section class="cek-reservasi__reservasi-info__body">
+    <section class="info-table__body">
       <ul>
-        <li>
-          <p class="cek-reservasi__reservasi-info__info-title">
-            Kode Reservasi
-          </p>
-          <p class="cek-reservasi__reservasi-info__info-subtitle">
-            {{ reservationInfo.reservation_code }}
-          </p>
-        </li>
-        <li>
-          <p class="cek-reservasi__reservasi-info__info-title">
-            Nama Penganggung Jawab
-          </p>
-          <p class="cek-reservasi__reservasi-info__info-subtitle">
-            {{ reservationInfo.name }}
-          </p>
-        </li>
-        <li>
-          <p class="cek-reservasi__reservasi-info__info-title">Asal Instansi</p>
-          <p class="cek-reservasi__reservasi-info__info-subtitle">
-            {{ reservationInfo.organization_name }}
-          </p>
-        </li>
-        <li>
-          <p class="cek-reservasi__reservasi-info__info-title">
-            Tanggal Kunjungan
-          </p>
-          <p class="cek-reservasi__reservasi-info__info-subtitle">
-            {{ formatedDate }}
-          </p>
-        </li>
-        <li>
-          <p class="cek-reservasi__reservasi-info__info-title">
-            Waktu Kunjungan
-          </p>
-          <p class="cek-reservasi__reservasi-info__info-subtitle">
-            {{ reservationInfo.shift }}
-          </p>
-        </li>
-        <li>
-          <p class="cek-reservasi__reservasi-info__info-title">
-            Status Permohonan
-          </p>
-          <v-chip :color="statusType" label>
-            {{ formatedStatus }}
-          </v-chip>
+        <li v-for="data in tableData" :key="data.title">
+          <p class="info-table__body__title">{{ data.title }}</p>
+          <div v-if="data.type">
+            <p class="info-table__body__subtitle">
+              {{ data.value }}
+            </p>
+          </div>
+          <div v-else>
+            <p class="info-table__body__subtitle">
+              {{ data.value }}
+            </p>
+          </div>
         </li>
       </ul>
     </section>
@@ -58,7 +25,11 @@
 
 <script>
 export default {
-  props: ["reservationInfo"],
+  props: {
+    tableData: {
+      type: Array,
+    },
+  },
   data() {
     return {
       statusType: null,
