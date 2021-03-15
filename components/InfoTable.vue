@@ -4,9 +4,9 @@
       <h2>{{tableHeader}}</h2>
     </section>
     <section class="info-table__body">
-      <ul>
+      <ul class="pa-0">
         <li v-for="data in tableData" :key="data.title">
-          <p class="info-table__body__title">{{ data.title }}</p>
+          <p class="info-table__body__title ma-0">{{ data.title }}</p>
           <div v-if="data.type">
             <v-chip :color="data.type.background" label :text-color="data.type.color"
               >{{ data.value }}

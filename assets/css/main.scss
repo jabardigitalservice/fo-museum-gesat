@@ -43,6 +43,55 @@
   }
 }
 
+.info-table {
+  margin-bottom: 53px;
+
+  &__header--bg-primary {
+    padding: 8px 24px;
+    background: $color-primary;
+    h2 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 180%;
+      color: white;
+    }
+  }
+
+  &__body {
+    padding: 30px 22px;
+    border: 1px solid lightgrey;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      padding-left: 0;
+
+      li {
+        list-style: none;
+        margin-bottom: 24px;
+      }
+    }
+
+    &__title,
+    &__subtitle {
+      padding: 0;
+      margin: 0;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 180%;
+      color: $color-text-default;
+    }
+
+    &__subtitle {
+      color: $color-primary;
+    }
+  }
+}
+
 @media (min-width: 960px) {
   .cek-reservasi {
     margin-top: 148px;
@@ -52,6 +101,14 @@
     }
     &__form__input-group {
       margin-bottom: 63px;
+    }
+  }
+
+  .info-table {
+    &__body {
+      ul {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   }
 }
