@@ -109,8 +109,8 @@
                 <v-text-field v-model="jumlahPeserta" :rules="jumlahPesertaRules" class="jumlah-peserta" type="number" label="Jumlah Peserta" suffix="Orang"></v-text-field> 
 
                 <v-checkbox
-                v-model="checkbox"
-                :rules="[v => !!v || 'Kamu harus menyetujui syarat dan ketentuan yang berlaku!']"
+                v-model="checkBox"
+                :rules="checkBoxRules"
                 label="Saya menyatakan bahwa saya menyetujui 
                 syarat dan ketentuan yang berlaku."
                 required
@@ -139,6 +139,8 @@ export default {
       tanggalKunjunganFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
       menu1: false,
       itemsShift: ['09.00-12.00', '13.00-16.00'],
+      checkBox : false,
+      checkBoxRules : [v => !!v || 'Kamu harus menyetujui syarat dan ketentuan yang berlaku!'],
       nama: '',
       namaRules: [
         v => !!v || "Nama wajib diisi"

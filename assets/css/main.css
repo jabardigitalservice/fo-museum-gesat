@@ -7,6 +7,7 @@
     }
     .h-welcome {
         margin-top: 100px;
+        color : #1976d2;
     }
 }
 
@@ -22,7 +23,14 @@
 @media (max-width: 960px) {
     .h-welcome {
         margin-top: 50px;
+        color :#1976d2;
     }
+}
+
+.v-app-bar.nav-logo {
+    height: 90px !important;
+    padding: 10px;
+    background: #FFFFFF !important;
 }
 
 .v-text-field.jumlah-peserta{
@@ -47,6 +55,7 @@
 .ajukan-title {
     color:rgb(26 152 213) !important;
     font-size: 16px;
+    margin-left: 10px;
 }
 
 .avatar-home {
@@ -60,10 +69,20 @@
 
 .card-ajukan {
     padding-top: 30px;
+    background-color: #FFFFFF !important;
+}
+
+.card-permohonan {
+    padding-top: 30px;
+    background-color: #FFFFFF !important;
 }
 
 .link-reservasi {
     text-decoration: none;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 180%;
 }
 
 .sbform-header {
