@@ -60,5 +60,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  // ENV Variables
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io'
   }
 }

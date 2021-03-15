@@ -69,7 +69,7 @@ export default {
     async getReservationInfo(code) {
       try {
         const res = await this.$axios.$get(
-          `https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io/api/command-center-reservation?keyword=${code}&by=reservation_code`
+          `${process.env.baseUrl}/api/command-center-reservation?keyword=${code}&by=reservation_code`
         );
         this.reservationInfo = { ...res.data[0] };
         this.loading = false;
