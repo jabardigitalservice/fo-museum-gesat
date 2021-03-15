@@ -20,6 +20,16 @@
     <section v-if="showReservationInfo">
       <ReservationInfoTable :reservationInfo="cleanData" />
     </section>
+    <p class="cek-reservasi__bantuan">
+      Apabila anda mengalami kesulitan, silahkan menghubungi
+      <a
+        href="#"
+        rel="noopener noreferrer"
+        target="_blank"
+        class="cek-reservasi__bantuan__link"
+        >Pusat Bantuan Jabar Command Center</a
+      >.
+    </p>
   </div>
 </template>
 
