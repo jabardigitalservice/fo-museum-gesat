@@ -255,7 +255,7 @@ export default {
                       'purpose'           : app.maksudTujuanKunjungan,
                       'visitors'          : app.jumlahPeserta,
                       'reservation_date'  : app.tanggalKunjungan,
-                      'shift'             : 1,
+                      'shift_id'          : 1,
                   }
               );
               await this.$axios.post(`command-center-reservation`, postData[0])
