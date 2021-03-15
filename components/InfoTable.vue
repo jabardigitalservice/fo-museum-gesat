@@ -1,7 +1,7 @@
 <template>
   <article class="info-table">
     <section class="info-table__header--bg-primary">
-      <h2>Informasi Reservasi</h2>
+      <h2>{{tableHeader}}</h2>
     </section>
     <section class="info-table__body">
       <ul>
@@ -26,6 +26,9 @@
 <script>
 export default {
   props: {
+    tableHeader: {
+      type: String,
+    },
     tableData: {
       type: Array,
     },

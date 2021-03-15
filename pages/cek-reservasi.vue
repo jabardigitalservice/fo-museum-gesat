@@ -19,7 +19,7 @@
       </div>
     </v-form>
     <section v-if="showReservationInfo">
-      <InfoTable :tableData="cleanData" />
+      <InfoTable :tableData="cleanData" tableHeader="Informasi Reservasi" />
     </section>
     <p class="cek-reservasi__bantuan">
       Apabila anda mengalami kesulitan, silahkan menghubungi
@@ -44,7 +44,7 @@ export default {
       showReservationInfo: false,
       loading: false,
       error: false,
-      statusType: null,
+      statusType: {},
       rules: [
         (code) => !!code || "Kode Reservasi tidak boleh kosong",
         (code) =>
