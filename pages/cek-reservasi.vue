@@ -31,11 +31,13 @@
         >Pusat Bantuan Jabar Command Center</a
       >.
     </p>
+    <AlertModal v-model="showModal" :modalData="modalData"/>
   </div>
 </template>
 
 <script>
 import { formatedDate } from "../utils/formatedDate";
+import { baseUrl } from "../utils/axios";
 export default {
   data() {
     return {
@@ -51,12 +53,14 @@ export default {
           code.length <= 13 ||
           "Kode Reservasi tidak boleh melebihi 13 karakter",
       ],
+      showModal: false,
+      modalData: {},
     };
   },
   methods: {
     onFormSubmit(e) {
       e.preventDefault();
-      if (this.formIsValid) {
+      if (this.reservationCode && this.formIsValid) {
         this.loading = true;
         this.getReservationInfo(this.reservationCode);
       }
@@ -66,17 +70,36 @@ export default {
       return this.$refs.form.validate();
     },
 
+    showAlert(alert) {
+      this.modalData = alert;
+      this.showModal = true;
+    },
+
     async getReservationInfo(code) {
       try {
         const res = await this.$axios.$get(
-          `${process.env.baseUrl}/api/command-center-reservation?keyword=${code}&by=reservation_code`
+          baseUrl(`/api/command-center-reservation?keyword=${code}&by=reservation_code`)
         );
-        this.reservationInfo = { ...res.data[0] };
+        if (res.data && res.data.length !== 0) {
+          this.reservationInfo = res.data[0];
+          this.showReservationInfo = true;
+        } else {
+          this.showAlert({
+            title: "Maaf, Kode Reservasi tidak ditemukan.",
+            type: "warning",
+            icon: "mdi-alert-circle-outline"
+          });
+        }
         this.loading = false;
-        this.showReservationInfo = true;
-      } catch (error) {
+      } catch (err) {
+        console.error(err);
         this.loading = false;
         this.showReservationInfo = false;
+        this.showAlert({
+          title: "Mohon maaf, kode reservasi tidak ditemukan",
+          type: "warning",
+          icon: "mdi-alert-circle-outline"
+        });
       }
     },
   },
