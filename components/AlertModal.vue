@@ -1,18 +1,35 @@
 <template>
-  <v-dialog v-model="showModal" max-width="800px">
-    <v-card v-if="modalData">
-      <v-card-title>
-        <h4>{{modalData.title}}</h4>
-      </v-card-title>
-      <v-card-subtitle>
-        <p>
-          Silahkan menghubungi Pusat Bantuan Jabar Command Center apabila anda
-          membutuhkan bantuan
-        </p>
-      </v-card-subtitle>
-      <v-card-actions>
-        <v-btn @click.stop="closeDialog" :class="modalData.type">Tutup</v-btn>
-      </v-card-actions>
+  <v-dialog v-model="show" max-width="650px">
+    <v-card v-if="modalData" class="pa-6">
+      <v-flex align-self-center class="text-center">
+        <div v-if="modalData.icon">
+          <v-icon size="95px" :color="modalData.type"
+            >{{ modalData.icon }}
+          </v-icon>
+        </div>
+        <v-card-title class="text-center justify-center">
+          <p class="title">{{ modalData.title }}</p>
+        </v-card-title>
+        <v-card-subtitle class="text-center">
+          <p class="subtitle-2">
+            Silahkan menghubungi
+            <a
+              class="text-bold text-decoration-none"
+              primary
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><wbr>Pusat Bantuan Jabar Command Center</wbr></a
+            >
+            apabila anda membutuhkan bantuan
+          </p>
+        </v-card-subtitle>
+        <v-card-actions class="text-center justify-center">
+          <v-btn @click.stop="show = false" :class="getButtonClass"
+            >Tutup</v-btn
+          >
+        </v-card-actions>
+      </v-flex>
     </v-card>
   </v-dialog>
 </template>
@@ -20,26 +37,25 @@
 <script>
 export default {
   props: {
-    modal: {
+    value: {
       type: Boolean,
-      default: true,
     },
     modalData: {
-      type: Object
+      type: Object,
+    },
+  },
+  computed: {
+    show: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit("input", value);
+      },
+    },
+    getButtonClass(){
+      return this.modalData.type || 'primary'
     }
   },
-  data(){
-    return {
-      showModal: this.modal
-    }
-  },
-  methods: {
-    closeDialog(){
-      this.showModal = false
-    }
-  }
 };
 </script>
-
-<style>
-</style>
