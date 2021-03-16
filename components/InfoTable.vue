@@ -38,31 +38,5 @@ export default {
       statusType: null,
     };
   },
-  computed: {
-    formatedDate() {
-      const date = new Date(this.reservationInfo.reservation_date);
-      return date.toLocaleDateString("id-ID", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    },
-
-    formatedStatus() {
-      switch (this.reservationInfo.approval_status) {
-        case "already_approved":
-          this.statusType = "green";
-          return "Diterima";
-
-        case "rejected":
-          this.statusType = "yellow";
-          return "Ditolak";
-
-        default:
-          this.statusType = "red";
-          return "Sedang Diproses";
-      }
-    },
-  },
 };
 </script>
