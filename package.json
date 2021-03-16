@@ -6,7 +6,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "backend": "json-server --watch data/db.json --port 5050"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
@@ -15,8 +16,10 @@
     "nuxt": "^2.14.12"
   },
   "devDependencies": {
+    "@mdi/font": "^5.9.55",
     "@nuxtjs/vuetify": "^1.11.3",
     "fibers": "^5.0.0",
+    "json-server": "^0.16.3",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1"
   }
