@@ -1,19 +1,19 @@
 <template>
-  <div class="cek-reservasi">
-    <h1 class="cek-reservasi__title">
+  <div class="mt-16">
+    <h1 class="text-h5 text-md-h4 font-weight-medium mb-10 primary--text">
       Cek Status Permohonan Reservasi
       <wbr>Jabar Command Center</wbr>
     </h1>
-    <v-form @submit="onFormSubmit" class="cek_reservasi__form">
-      <label class="cek-reservasi__form__label">Kode Reservasi </label>
-      <div class="cek-reservasi__form__input-group">
+    <v-form @submit="onFormSubmit" class="mb-12">
+      <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
+      <div class="d-flex flex-direction-column">
         <v-text-field
           type="text"
           v-model="reservationCode"
           :rules="rules"
           placeholder="contoh: JCC0000000001"
         />
-        <v-btn color="primary" large :loading="loading" type="submit"
+        <v-btn color="primary" large :loading="loading" type="submit" class="text-button"
           >Cek Status</v-btn
         >
       </div>
@@ -21,13 +21,13 @@
     <section v-if="showReservationInfo">
       <InfoTable :tableData="cleanedData" tableHeader="Informasi Reservasi" />
     </section>
-    <p class="cek-reservasi__bantuan">
+    <p class="text-subtitle-1">
       Apabila anda mengalami kesulitan, silahkan menghubungi
       <a
         href="#"
         rel="noopener noreferrer"
         target="_blank"
-        class="cek-reservasi__bantuan__link"
+        class="text-subtitle-1 font-weight-bold primary--text text-decoration-none"
         >Pusat Bantuan Jabar Command Center</a
       >.
     </p>
