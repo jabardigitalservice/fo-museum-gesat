@@ -104,7 +104,7 @@ export default {
     },
   },
   computed: {
-    cleanData() {
+    cleanedData() {
       return [
         {
           title: "Kode Reservasi",
