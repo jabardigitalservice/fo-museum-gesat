@@ -20,7 +20,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/css/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -58,7 +57,15 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
-        }
+        },
+        light: {
+          primary: '#1682B6',
+          secondary: '#16B65C',
+          success: '#16B65C',
+          warning: '#ECA413',
+          danger: '#E5501A',
+          darkgray: '#333333'
+        },
       }
     }
   },
