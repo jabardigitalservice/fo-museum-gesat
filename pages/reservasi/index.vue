@@ -330,10 +330,9 @@ export default {
                       this.reservationCode = resp.data.data.reservation_code
                   })
               } catch (e) {
-                  const error = e.response.data
-                  if (error.errors && error.errors.name) {
-                    
-                  }
+                  this.$toast.error('Terjadi kesalahan saat mengirim data', {
+                     duration: 5000
+                  })
               }
           }
       },
