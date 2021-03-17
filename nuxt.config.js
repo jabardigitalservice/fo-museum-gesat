@@ -39,6 +39,11 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios'],
 
+  // Config axios baseURL
+  axios: {
+    baseURL: process.env.BASE_URL || 'https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io'
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -62,8 +67,4 @@ export default {
   build: {
   },
 
-  // ENV Variables
-  env: {
-    baseUrl: process.env.BASE_URL || 'https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io'
-  }
 }

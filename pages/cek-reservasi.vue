@@ -19,7 +19,7 @@
       </div>
     </v-form>
     <section v-if="showReservationInfo">
-      <InfoTable :tableData="cleanData" tableHeader="Informasi Reservasi" />
+      <InfoTable :tableData="cleanedData" tableHeader="Informasi Reservasi" />
     </section>
     <p class="cek-reservasi__bantuan">
       Apabila anda mengalami kesulitan, silahkan menghubungi
@@ -37,7 +37,6 @@
 
 <script>
 import { formatedDate } from "../utils/formatedDate";
-import { baseUrl } from "../utils/axios";
 export default {
   data() {
     return {
@@ -78,7 +77,7 @@ export default {
     async getReservationInfo(code) {
       try {
         const res = await this.$axios.$get(
-          baseUrl(`/api/command-center-reservation?keyword=${code}&by=reservation_code`)
+          `/api/command-center-reservation?keyword=${code}&by=reservation_code`
         );
         if (res.data && res.data.length !== 0) {
           this.reservationInfo = res.data[0];
@@ -87,7 +86,7 @@ export default {
           this.showAlert({
             title: "Maaf, Kode Reservasi tidak ditemukan.",
             type: "warning",
-            icon: "mdi-alert-circle-outline"
+            icon: "mdi-alert-circle-outline",
           });
         }
         this.loading = false;
@@ -98,7 +97,7 @@ export default {
         this.showAlert({
           title: "Mohon maaf, kode reservasi tidak ditemukan",
           type: "warning",
-          icon: "mdi-alert-circle-outline"
+          icon: "mdi-alert-circle-outline",
         });
       }
     },
