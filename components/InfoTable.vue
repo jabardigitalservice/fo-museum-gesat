@@ -1,26 +1,42 @@
 <template>
-  <article class="info-table">
-    <section class="info-table__header--bg-primary">
-      <h2>{{tableHeader}}</h2>
-    </section>
-    <section class="info-table__body">
-      <ul class="pa-0">
-        <li v-for="data in tableData" :key="data.title">
-          <p class="info-table__body__title ma-0">{{ data.title }}</p>
-          <div v-if="data.type">
-            <v-chip :color="data.type.background" label :text-color="data.type.color"
-              >{{ data.value }}
-            </v-chip>
-          </div>
-          <div v-else>
-            <p class="info-table__body__subtitle">
-              {{ data.value }}
+  <v-card outlined class="mb-12">
+    <v-card-title class="pa-3 ps-6 primary">
+      <h2 class="text-subtitle-1 font-weight-bold white--text">{{ tableHeader }}</h2>
+    </v-card-title>
+    <v-card-body>
+      <v-container class="pa-4 ps-6">
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            xs="12"
+            sm="12"
+            md="4"
+            lg="4"
+            v-for="data in tableData"
+            :key="data.title"
+            class="mb-4 mb-md-8"
+          >
+            <p class="text-subtitle-1 font-weight-medium mb-1">
+              {{ data.title }}
             </p>
-          </div>
-        </li>
-      </ul>
-    </section>
-  </article>
+            <div v-if="data.type">
+              <v-chip
+                :color="data.type.background"
+                label
+                :text-color="data.type.color"
+                >{{ data.value }}
+              </v-chip>
+            </div>
+            <div v-else>
+              <p class="text-subtitle-1 font-weight-medium primary--text mb-0">
+                {{ data.value }}
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card-body>
+  </v-card>
 </template>
 
 <script>
