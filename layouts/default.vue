@@ -14,7 +14,7 @@
     </v-app-bar>
     <v-main>
       <v-container>
-        <nuxt />
+        <nuxt class="pt-16 pb-10"/>
       </v-container>
     </v-main>
   </v-app>
