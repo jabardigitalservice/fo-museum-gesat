@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="show" max-width="650px">
-    <v-card v-if="modalData" class="pa-6">
+    <v-card v-if="modalData" class="pa-4">
       <v-flex align-self-center class="text-center">
         <div v-if="modalData.icon">
           <v-icon size="95px" :color="modalData.type"
@@ -11,17 +11,16 @@
           <p class="title">{{ modalData.title }}</p>
         </v-card-title>
         <v-card-subtitle class="text-center">
-          <p class="subtitle-2">
+          <p class="text-subtitle-2">
             Silahkan menghubungi
             <a
-              class="text-bold text-decoration-none"
-              primary
+              class="font-weight-bold text-decoration-none primary--text"
               href="#"
               target="_blank"
               rel="noopener noreferrer"
               ><wbr>Pusat Bantuan Jabar Command Center</wbr></a
             >
-            apabila anda membutuhkan bantuan
+            <wbr>apabila anda membutuhkan bantuan</wbr>
           </p>
         </v-card-subtitle>
         <v-card-actions class="text-center justify-center">
