@@ -123,7 +123,7 @@ export default {
         },
         {
           title: "Waktu Kunjungan",
-          value: this.reservationInfo.shift,
+          value: this.reservationInfo.command_center_shift,
         },
         {
           title: "Status Permohonan",
