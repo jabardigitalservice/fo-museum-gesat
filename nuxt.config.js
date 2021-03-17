@@ -2,9 +2,14 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
 
-  env: {
-    googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
+  publicRuntimeConfig: {
+    recaptcha: {
+      /* reCAPTCHA options */
+      googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
+      secretRecaptchaKey: process.env.SECRET_RECAPTHCA_KEY
+    }
   },
+
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -43,9 +48,16 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/toast',
+    '@nuxtjs/recaptcha',
   ],
 
+  recaptcha: {
+    siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
+    version: 3
+  },
+  
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: process.env.API_URL
