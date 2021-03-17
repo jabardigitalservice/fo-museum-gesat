@@ -1,6 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+
+  env: {
+    googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - reservasi-commandcenter-microsite',
