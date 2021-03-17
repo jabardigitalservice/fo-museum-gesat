@@ -77,7 +77,7 @@ export default {
     async getReservationInfo(code) {
       try {
         const res = await this.$axios.$get(
-          `/api/command-center-reservation?search=${code}`
+          `/public/api/command-center-reservation?search=${code}`
         );
         if (res.data && res.data.length !== 0) {
           this.reservationInfo = res.data[0];
