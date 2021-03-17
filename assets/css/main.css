@@ -85,14 +85,8 @@
     line-height: 180%;
 }
 
-.sbform-header {
-    font-weight: 400;
-}
-
-.bform-header {
-    font-size: 30px;
-}
-
-.pt-8 {
-    padding-top: 80px
-}
+.success-dialog { font-size: 100px !important; }
+/* .text-h5.pa-5 { color: #388E3C !important; } */
+.color-header { color: #1976d2 }
+.pt-8 { padding-top: 80px }
+.pt-100 { padding-top: 80px; }
