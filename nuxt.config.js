@@ -36,11 +36,27 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/recaptcha'
+  ],
+
+  recaptcha: {
+    siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
+    version: 3
+  },
+
+  publicRuntimeConfig: {
+    recaptcha: {
+      /* reCAPTCHA options */
+      googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
+      secretRecaptchaKey: process.env.SECRET_RECAPTHCA_KEY
+    }
+  },
 
   // Config axios baseURL
   axios: {
-    baseURL: process.env.BASE_URL || 'https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io'
+    baseURL: process.env.API_URL
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -72,6 +88,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  },
+  }
 
 }
