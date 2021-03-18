@@ -6,17 +6,16 @@
     </h1>
     <v-form @submit="onFormSubmit" class="mb-12">
       <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
-      <div class="d-flex flex-direction-column">
         <v-text-field
           type="text"
           v-model="reservationCode"
           :rules="rules"
           placeholder="contoh: JCC0000000001"
         />
+        <recaptcha class="mb-6"/>
         <v-btn color="primary" large :loading="loading" type="submit" class="text-button"
           >Cek Status</v-btn
         >
-      </div>
     </v-form>
     <section v-if="showReservationInfo">
       <InfoTable :tableData="cleanedData" tableHeader="Informasi Reservasi" />
@@ -76,6 +75,7 @@ export default {
 
     async getReservationInfo(code) {
       try {
+        await this.$recaptcha.getResponse();
         const res = await this.$axios.$get(
           `/api/public/command-center-reservation/${code}`
         );
@@ -89,15 +89,16 @@ export default {
             icon: "mdi-alert-circle-outline",
           });
         }
+        await this.$recaptcha.reset();
         this.loading = false;
       } catch (err) {
         console.error(err);
         this.loading = false;
         this.showReservationInfo = false;
         this.showAlert({
-          title: "Mohon maaf, kode reservasi tidak ditemukan",
-          type: "warning",
-          icon: "mdi-alert-circle-outline",
+          title: "Mohon maaf, terjadi kesalahan",
+          type: "error",
+          icon: "mdi-close-circle-outline",
         });
       }
     },
@@ -135,7 +136,7 @@ export default {
 
     formatedStatus() {
       switch (this.reservationInfo.approval_status) {
-        case "already_approved":
+        case "ALREADY_APPROVED":
           this.statusType = {
             status: "success",
             background: "green",
@@ -143,7 +144,7 @@ export default {
           };
           return "Diterima";
 
-        case "rejected":
+        case "REJECTED":
           this.statusType = {
             status: "danger",
             background: "red",
