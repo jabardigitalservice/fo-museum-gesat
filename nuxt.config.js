@@ -56,7 +56,7 @@ export default {
 
   // Config axios baseURL
   axios: {
-    baseURL: process.env.BASE_URL || 'https://e5801c76-cb17-4176-97ad-2fe8186697f7.mock.pstmn.io'
+    baseURL: process.env.API_URL
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
