@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
+    <v-col cols="12" sm="8" md="8" offset-md="1">
       <h1 class="h-welcome pb-5">Halo Selamat Datang,</h1>
       <h4 class="sb-welcome">
         Anda berada di halaman Reservasi Kunjungan <b>Jabar Command Center</b>.
@@ -15,8 +15,7 @@
       </h4>
       <h4 class="qs-welcome">Apa yang ingin anda lakukan ?</h4>
     </v-col>
-    <v-col cols="12" sm="12" md="12"> </v-col>
-    <v-col cols="12" sm="8" md="6" class="ajukan-permohonan">
+    <v-col cols="12" sm="8" md="4" align="center">
       <v-card
         class="mx-auto card-ajukan"
         color="#E6E6E6"
@@ -36,7 +35,7 @@
         </v-list-item>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="8" md="6" class="cek-permohonan">
+    <v-col cols="12" sm="8" md="4" align="center">
       <v-card
         class="mx-auto card-permohonan"
         color="#E6E6E6"
@@ -56,9 +55,8 @@
         </v-list-item>
       </v-card>
     </v-col>
-    <v-col cols="12" sm="12" md="12"></v-col>
-    <v-col cols="12" sm="8" md="6">
-      <h4 class="font-weight-regular">
+    <v-col cols="12" align="center" sm="8" md="8">
+      <h4 class="font-weight-regular pt-10">
         Apabila anda mengalami kesulitan, silahkan menghubungi
         <nuxt-link class="link-reservasi" to="#"
           >Pusat Bantuan Jabar Command Center</nuxt-link
