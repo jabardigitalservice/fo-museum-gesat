@@ -1,8 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <h1 class="h-welcome">Halo Selamat Datang,</h1>
-      <p></p>
+      <h1 class="h-welcome pb-5">Halo Selamat Datang,</h1>
       <h4 class="sb-welcome">
         Anda berada di halaman Reservasi Kunjungan <b>Jabar Command Center</b>.
         Anda dapat mengajukan permohonan kunjungan dengan mengisi data diri pada
@@ -14,7 +13,6 @@
           >Cek Status Permohonan.</nuxt-link
         >
       </h4>
-      <p></p>
       <h4 class="qs-welcome">Apa yang ingin anda lakukan ?</h4>
     </v-col>
     <v-col cols="12" sm="12" md="12"> </v-col>
