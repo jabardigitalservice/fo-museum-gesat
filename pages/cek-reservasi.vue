@@ -86,7 +86,7 @@ export default {
 
       try {
         const res = await this.$axios.$get(
-          `/api/public/command-center-reservation/${code}`
+          `/public/command-center-reservation/${code}`
         );
         if (res.data) {
           this.reservationInfo = res.data;
