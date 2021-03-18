@@ -36,7 +36,23 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/recaptcha'
+  ],
+
+  recaptcha: {
+    siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
+    version: 3
+  },
+
+  publicRuntimeConfig: {
+    recaptcha: {
+      /* reCAPTCHA options */
+      googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
+      secretRecaptchaKey: process.env.SECRET_RECAPTHCA_KEY
+    }
+  },
 
   // Config axios baseURL
   axios: {
@@ -72,6 +88,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  },
+  }
 
 }
