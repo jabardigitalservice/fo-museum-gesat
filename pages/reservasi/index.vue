@@ -2,10 +2,9 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="5">
       <h1 class="font-weight-bold color-header">Form Permohonan Reservasi</h1>
-      <h1 class="font-weight-bold color-header">
+      <h1 class="font-weight-bold color-header pb-2">
         Kunjungan Jabar Command Center
       </h1>
-      <p></p>
       <h4 class="font-weight-regular">
         Harap mengisi data dibawah ini dengan sebenar-benarnya
       </h4>
@@ -18,7 +17,7 @@
       >
         <v-text-field
           v-model="name"
-          :rules="nameRules"
+          :rules="this.$nameRules()"
           label="Nama Penanggung Jawab/Nama Pengunjung *"
           :maxLength="100"
           :counter="100"
@@ -26,7 +25,7 @@
         ></v-text-field>
         <v-text-field
           v-model="nik"
-          :rules="nikRules"
+          :rules="this.$nikRules()"
           label="Nomor Identitas (NIK) *"
           :counter="16"
           :maxLength="16"
@@ -34,21 +33,21 @@
         ></v-text-field>
         <v-text-field
           v-model="organization"
-          :rules="organizationRules"
+          :rules="this.$organizationRules()"
           :maxLength="50"
           :counter="50"
           label="Nama Organisasi / Instansi"
         ></v-text-field>
         <v-text-field
           v-model="organizationAddress"
-          :rules="organizationAddressRules"
+          :rules="this.$organizationAddressRules()"
           :counter="100"
           :maxLength="100"
           label="Alamat Organisasi / Instansi"
         ></v-text-field>
         <v-text-field
           v-model="phoneNumber"
-          :rules="phoneNumberRules"
+          :rules="this.$phoneNumberRules()"
           :minLength="10"
           :maxLength="13"
           :counter="13"
@@ -57,7 +56,7 @@
         ></v-text-field>
         <v-text-field
           v-model="email"
-          :rules="emailRules"
+          :rules="this.$emailRules()"
           :maxLength="50"
           :counter="50"
           label="Alamat Email *"
@@ -65,15 +64,15 @@
         ></v-text-field>
         <v-textarea
           name="input-maksudTujuan"
+          class="pb-2"
           v-model="purpose"
-          :rules="purposeRules"
+          :rules="this.$purposeRules()"
           :maxLength="255"
           :counter="255"
           label="Maksud dan Tujuan Kunjungan *"
           value=""
           hint="Isi Pesan"
         ></v-textarea>
-        <p></p>
         <v-menu
           ref="menu1"
           v-model="menu1"
@@ -86,7 +85,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
               v-model="dateVisitorFormat"
-              :rules="dateVisitorFormatRules"
+              :rules="dateVisitorRules"
               label="Tanggal Kunjungan *"
               hint="Bulan/Hari/Tahun"
               persistent-hint
@@ -105,10 +104,9 @@
             @input="menu1 = false"
           ></v-date-picker>
         </v-menu>
-        <p></p>
         <v-select
           v-model="timeVisitor"
-          :rules="timeVisitorRules"
+          :rules="this.$timeVisitorRules()"
           :hint="
             timeVisitor != null
               ? `${timeVisitor.code}, Kapasitas ${timeVisitor.capacity} Orang`
@@ -134,7 +132,7 @@
         ></v-text-field>
         <v-checkbox
           v-model="agree"
-          :rules="agreeRules"
+          :rules="this.$agreeRules()"
           label="Saya menyatakan bahwa saya menyetujui 
           syarat dan ketentuan yang berlaku."
           required
@@ -156,8 +154,7 @@
           <template>
             <v-card>
               <v-card-text>
-                <v-col align="center">
-                  <p></p>
+                <v-col class="pt-7" align="center">
                   <v-icon class="success-dialog" x-large color="green darken-2"
                     >mdi-check-circle-outline</v-icon
                   >
@@ -203,10 +200,15 @@
             </v-card>
           </template>
         </v-dialog>
-        <v-btn block color="success" type="submit" :disabled="!valid">
+        <v-btn
+          block
+          class="mb-3"
+          color="success"
+          type="submit"
+          :disabled="!valid"
+        >
           Kirim Permohonan
         </v-btn>
-        <p></p>
         <nuxt-link to="/" class="btn-batalkan">
           <v-btn block color="error"> Batalkan </v-btn>
         </nuxt-link>
@@ -223,62 +225,20 @@ export default {
     errorCaptcha: false,
     itemsShift: [],
     agree: false,
-    agreeRules: [
-      (v) => !!v || "Kamu harus menyetujui syarat dan ketentuan yang berlaku!",
-    ],
     name: "",
-    nameRules: [
-      (v) => !!v || "Nama wajib diisi",
-      (v) =>
-        /^[a-zA-Z\s]*$/.test(v) ||
-        "Nama tidak boleh mengandung angka, spesial karakter dan emotikon",
-      (v) => /[^-\s]+$/.test(v) || "Format pengisian tidak diizinkan",
-    ],
     nik: "",
-    nikRules: [
-      (v) => !!v || "NIK wajib diisi",
-      (v) => /^.{16,16}$/.test(v) || "NIK minimal 16 digit",
-      (v) => /^[0-9]*$/.test(v) || "NIK tidak boleh mengandung huruf",
-    ],
     organization: "",
-    organizationRules: [
-      (v) =>
-        /^[a-zA-Z\s]*$/.test(v) ||
-        "Nama Organisasi tidak boleh mengandung angka, spesial karakter dan emotikon",
-    ],
     organizationAddress: "",
-    organizationAddressRules: [
-      (v) =>
-        /^[a-zA-Z0-9.,-\s/\//]*$/.test(v) ||
-        "Alamat Organisasi tidak boleh mengandung emotikon atau simbol",
-    ],
     phoneNumber: "",
-    phoneNumberRules: [
-      (v) => !!v || "Nomor Telepon Penanggung jawab wajib diisi",
-      (v) => /^.{10,13}$/.test(v) || "Nomor Telepon minimal 10 digit",
-      (v) =>
-        /^[0-9]*$/.test(v) ||
-        "Nomor Telepon Penanggung jawab tidak boleh mengandung huruf",
-    ],
     email: "",
-    emailRules: [
-      (v) => !!v || "E-mail wajib diisi",
-      (v) => /.+@.+/.test(v) || "E-mail yang dimasukkan harus valid",
-    ],
     purpose: "",
-    purposeRules: [
-      (v) => !!v || "Maksud dan Tujuan Kunjungan wajib diisi",
-      (v) => /[^-\s]+$/.test(v) || "Format pengisian tidak diizinkan",
-    ],
     dateVisitor: new Date().toISOString().substr(0, 10),
     dateVisitorRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
     dateVisitorFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
-    dateVisitorFormatRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
     menu1: false,
     visitors: "",
     visitorsRules: [(v) => !!v || "Jumlah Peserta wajib diisi"],
     valid: false,
-    timeVisitorRules: [(v) => !!v || "Waktu kunjungan wajib diisi"],
     recaptchaResponse: null,
     dialogSuccess: false,
   }),
