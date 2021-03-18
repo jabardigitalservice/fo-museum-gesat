@@ -4,13 +4,15 @@
       Cek Status Permohonan Reservasi
       <wbr>Jabar Command Center</wbr>
     </h1>
-    <v-form @submit="onFormSubmit" class="mb-12">
+    <v-form @submit="onFormSubmit" class="mb-12" lazy-validation ref="form">
       <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
         <v-text-field
           type="text"
           v-model="reservationCode"
           :rules="rules"
           placeholder="contoh: JCC0000000001"
+          required
+          class="mb-4"
         />
         <recaptcha class="mb-6"/>
         <v-btn color="primary" large :loading="loading" type="submit" class="text-button"
@@ -58,14 +60,10 @@ export default {
   methods: {
     onFormSubmit(e) {
       e.preventDefault();
-      if (this.reservationCode && this.formIsValid) {
+      if (this.$refs.form.validate()) {
         this.loading = true;
         this.getReservationInfo(this.reservationCode);
       }
-    },
-
-    formIsValid() {
-      return this.$refs.form.validate();
     },
 
     showAlert(alert) {
@@ -76,6 +74,17 @@ export default {
     async getReservationInfo(code) {
       try {
         await this.$recaptcha.getResponse();
+        await this.$recaptcha.reset();
+      } catch (error) {
+        this.loading = false;
+        return this.showAlert({
+          title: `Anda belum mencentang Captcha`,
+          type: "warning",
+          icon: "mdi-alert-circle-outline",
+        });
+      }
+
+      try {
         const res = await this.$axios.$get(
           `/api/public/command-center-reservation/${code}`
         );
@@ -89,10 +98,8 @@ export default {
             icon: "mdi-alert-circle-outline",
           });
         }
-        await this.$recaptcha.reset();
         this.loading = false;
       } catch (err) {
-        console.error(err);
         this.loading = false;
         this.showReservationInfo = false;
         this.showAlert({
