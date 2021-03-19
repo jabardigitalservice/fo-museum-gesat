@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import "variables";
+
+.cek-reservasi {
+  margin-top: 50px;
+  color: $color-text-default;
+  font-style: normal;
+  font-family: Lato;
+
+  &__title {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    line-height: 150%;
+    margin-bottom: 18px;
+    color: $color-primary;
+  }
+
+  &__form__label {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 180%;
+  }
+
+  &__form__input-group {
+    display: flex;
+    margin-bottom: 40px;
+  }
+
+  &__bantuan {
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 180%;
+    &__link {
+      padding: 0;
+      margin: 0;
+      font-weight: bold;
+      text-decoration: none;
+      color: $color-primary;
+    }
+  }
+}
+
+.info-table {
+  margin-bottom: 53px;
+
+  &__header--bg-primary {
+    padding: 8px 24px;
+    background: $color-primary;
+    h2 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 180%;
+      color: white;
+    }
+  }
+
+  &__body {
+    padding: 30px 22px;
+    border: 1px solid lightgrey;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      padding-left: 0;
+
+      li {
+        list-style: none;
+        margin-bottom: 24px;
+      }
+    }
+
+    &__title,
+    &__subtitle {
+      padding: 0;
+      margin: 0;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 180%;
+      color: $color-text-default;
+    }
+
+    &__subtitle {
+      color: $color-primary;
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .cek-reservasi {
+    margin-top: 148px;
+    &__title {
+      font-size: 32px;
+      margin-bottom: 39px;
+    }
+    &__form__input-group {
+      margin-bottom: 63px;
+    }
+  }
+
+  .info-table {
+    &__body {
+      ul {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}

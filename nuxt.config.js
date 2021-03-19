@@ -58,7 +58,7 @@ export default {
     siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
     version: 3
   },
-  
+
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: process.env.API_URL
@@ -78,7 +78,15 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
-        }
+        },
+        light: {
+          primary: '#1682B6',
+          secondary: '#16B65C',
+          success: '#16B65C',
+          warning: '#ECA413',
+          danger: '#E5501A',
+          darkgray: '#333333'
+        },
       }
     }
   },
@@ -86,4 +94,5 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
+
 }
