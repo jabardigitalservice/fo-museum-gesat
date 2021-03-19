@@ -248,7 +248,7 @@ export default {
       return this.formatDate(this.dateVisitor);
     },
     minDates() {
-      return this.dateVisitor;
+      return new Date().toISOString().substr(0,10);
     },
     maxDates() {
       var getDate = new Date();
