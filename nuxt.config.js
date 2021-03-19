@@ -1,10 +1,20 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+
+  publicRuntimeConfig: {
+    recaptcha: {
+      /* reCAPTCHA options */
+      googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
+      secretRecaptchaKey: process.env.SECRET_RECAPTHCA_KEY
+    }
+  },
+
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - reservasi-commandcenter-microsite',
-    title: 'reservasi-commandcenter-microsite',
+    title: 'Reservasi Command Center Microsite',
     htmlAttrs: {
       lang: 'en'
     },
@@ -20,10 +30,12 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/css/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/validation-rules',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,8 +49,21 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/toast',
+    '@nuxtjs/recaptcha',
   ],
 
+  recaptcha: {
+    siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
+    version: 3
+  },
+  
+  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
+  axios: {
+    baseURL: process.env.API_URL
+  },
+  
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
