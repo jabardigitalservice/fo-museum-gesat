@@ -248,7 +248,7 @@ export default {
       return this.formatDate(this.dateVisitor);
     },
     minDates() {
-      return new Date().toISOString().substr(0,10);
+      return new Date().toISOString().substr(0, 10);
     },
     maxDates() {
       var getDate = new Date();
@@ -330,7 +330,7 @@ export default {
         try {
           await this.$recaptcha.getResponse();
           await this.$axios
-            .post(`command-center-reservation`, {
+            .post(`public/command-center-reservation`, {
               name: this.name,
               nik: this.nik,
               organization_name: this.organization,
