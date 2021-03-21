@@ -7,8 +7,8 @@
             >{{ modalData.icon }}
           </v-icon>
         </div>
-        <v-card-title class="text-center justify-center">
-          <p class="title">{{ modalData.title }}</p>
+        <v-card-title class="text-center justify-center text-wrap">
+          <p class="title" :style="{'word-break' : 'normal'}">{{ modalData.title }}</p>
         </v-card-title>
         <v-card-subtitle class="text-center">
           <p class="text-subtitle-2">
