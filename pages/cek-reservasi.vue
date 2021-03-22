@@ -29,7 +29,6 @@
           <a
             href="#"
             rel="noopener noreferrer"
-            target="_blank"
             class="text-subtitle-1 font-weight-bold primary--text text-decoration-none"
             >Pusat Bantuan Jabar Command Center</a
           >.
