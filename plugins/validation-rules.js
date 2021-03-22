@@ -24,7 +24,7 @@ export default ({
 
   inject('nameRules', v => [
     (v) => !!v || "Nama wajib diisi",
-    (v) => /^[a-zA-Z\s]*$/.test(v) || "Nama tidak boleh mengandung angka, spesial karakter dan emotikon",
+    (v) => /^[a-zA-Z\s']*$/.test(v) || "Nama tidak boleh mengandung angka, spesial karakter dan emotikon",
     (v) => /[^-\s]+$/.test(v) || "Format pengisian tidak diizinkan",
   ])
 
@@ -44,7 +44,7 @@ export default ({
   ])
 
   inject('organizationRules', v => [
-    (v) => /^[a-zA-Z\s]*$/.test(v) || "Nama Organisasi tidak boleh mengandung angka, spesial karakter dan emotikon",
+    (v) => /^[a-zA-Z0-9'\s]*$/.test(v) || "Nama Organisasi tidak boleh mengandung spesial karakter dan emotikon",
   ])
 
   inject('organizationAddressRules', v => [

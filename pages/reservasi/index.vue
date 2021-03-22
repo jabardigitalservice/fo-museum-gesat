@@ -248,7 +248,7 @@ export default {
       return this.formatDate(this.dateVisitor);
     },
     minDates() {
-      return this.dateVisitor;
+      return new Date().toISOString().substr(0, 10);
     },
     maxDates() {
       var getDate = new Date();
@@ -276,7 +276,7 @@ export default {
       document.execCommand("copy");
     },
     async getListShift() {
-      this.itemsShift = await this.$axios.$get("command-center-shift");
+      this.itemsShift = await this.$axios.$get("/command-center-shift");
     },
     allowedDates(val) {
       var dateNow = new Date();
@@ -296,7 +296,7 @@ export default {
     },
     async changeVisitors(val, date) {
       var checkAvailibility = await this.$axios.get(
-        `command-center-availability?reservation_date=${date}&shift_id=${val.id}`
+        `/command-center-availability?reservation_date=${date}&command_center_shift_id=${val.id}`
       );
       this.avalibilityVisitor =
         "Kuota Peserta Sisa " +
@@ -330,7 +330,7 @@ export default {
         try {
           await this.$recaptcha.getResponse();
           await this.$axios
-            .post(`command-center-reservation`, {
+            .post(`/public/command-center-reservation`, {
               name: this.name,
               nik: this.nik,
               organization_name: this.organization,
