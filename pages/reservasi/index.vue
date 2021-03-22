@@ -320,10 +320,11 @@ export default {
         this.visitorsRules.push(
           (v) => !!v || "Jumlah Peserta wajib diisi",
           (v) =>
-            (v && v <= checkAvailibility.data.data.available && v > 0) ||
+            (v && v <= checkAvailibility.data.data.available) ||
             "Jumlah Peserta Maksimum " +
               checkAvailibility.data.data.available +
-              " Orang"
+              " Orang",
+          (v) => (v && v > 0) || "Jumlah Peserta harus lebih dari nol"
         );
       }
     },
