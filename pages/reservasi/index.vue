@@ -100,6 +100,7 @@
             :min="minDates"
             :max="maxDates"
             :allowed-dates="allowedDates"
+            @change="changeVisitors(timeVisitor, dateVisitor)"
             no-title
             @input="menu1 = false"
           ></v-date-picker>
