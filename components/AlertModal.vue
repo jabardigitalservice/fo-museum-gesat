@@ -12,7 +12,7 @@
         </v-card-title>
         <v-card-subtitle class="text-center">
           <p class="text-subtitle-2">
-            Silahkan menghubungi
+            Silakan menghubungi
             <a
               class="font-weight-bold text-decoration-none primary--text"
               href="#"

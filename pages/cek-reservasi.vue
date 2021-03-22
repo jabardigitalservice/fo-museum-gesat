@@ -25,7 +25,7 @@
           <InfoTable :tableData="cleanedData" tableHeader="Informasi Reservasi" />
         </section>
         <p class="text-subtitle-1">
-          Apabila anda mengalami kesulitan, silahkan menghubungi
+          Apabila anda mengalami kesulitan, silakan menghubungi
           <a
             href="#"
             rel="noopener noreferrer"
