@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="5">
+    <v-col cols="12" sm="8" md="6">
       <h1 class="font-weight-bold color-header">Form Permohonan Reservasi</h1>
       <h1 class="font-weight-bold color-header pb-2">
         Kunjungan Jabar Command Center
