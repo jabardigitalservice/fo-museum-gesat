@@ -12,11 +12,10 @@
         </v-card-title>
         <v-card-subtitle class="text-center">
           <p class="text-subtitle-2">
-            Silahkan menghubungi
+            Silakan menghubungi
             <a
               class="font-weight-bold text-decoration-none primary--text"
               href="#"
-              target="_blank"
               rel="noopener noreferrer"
               ><wbr>Pusat Bantuan Jabar Command Center</wbr></a
             >
