@@ -1,39 +1,43 @@
 <template>
-  <div class="mt-16">
-    <h1 class="text-h5 text-md-h4 font-weight-medium mb-10 primary--text">
-      Cek Status Permohonan Reservasi
-      <wbr>Jabar Command Center</wbr>
-    </h1>
-    <v-form @submit="onFormSubmit" class="mb-12" lazy-validation ref="form">
-      <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
-        <v-text-field
-          type="text"
-          v-model="reservationCode"
-          :rules="rules"
-          placeholder="contoh: JCC0000000001"
-          required
-          class="mb-4"
-        />
-        <recaptcha class="mb-6"/>
-        <v-btn color="primary" large :loading="loading" type="submit" class="text-button"
-          >Cek Status</v-btn
-        >
-    </v-form>
-    <section v-if="showReservationInfo">
-      <InfoTable :tableData="cleanedData" tableHeader="Informasi Reservasi" />
-    </section>
-    <p class="text-subtitle-1">
-      Apabila anda mengalami kesulitan, silahkan menghubungi
-      <a
-        href="#"
-        rel="noopener noreferrer"
-        target="_blank"
-        class="text-subtitle-1 font-weight-bold primary--text text-decoration-none"
-        >Pusat Bantuan Jabar Command Center</a
-      >.
-    </p>
-    <AlertModal v-model="showModal" :modalData="modalData"/>
-  </div>
+<v-row justify="center" align="center">
+    <v-col cols="12" sm="8" md="6">
+      <div class="mt-16">
+        <h1 class="text-h5 text-md-h4 font-weight-medium mb-10 primary--text">
+          Cek Status Permohonan Reservasi
+          <wbr>Jabar Command Center</wbr>
+        </h1>
+        <v-form @submit="onFormSubmit" class="mb-12" lazy-validation ref="form">
+          <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
+            <v-text-field
+              type="text"
+              v-model="reservationCode"
+              :rules="rules"
+              placeholder="contoh: JCC0000000001"
+              required
+              class="mb-4"
+            />
+            <recaptcha class="mb-6"/>
+            <v-btn color="primary" large :loading="loading" type="submit" class="text-button"
+              >Cek Status</v-btn
+            >
+        </v-form>
+        <section v-if="showReservationInfo">
+          <InfoTable :tableData="cleanedData" tableHeader="Informasi Reservasi" />
+        </section>
+        <p class="text-subtitle-1">
+          Apabila anda mengalami kesulitan, silahkan menghubungi
+          <a
+            href="#"
+            rel="noopener noreferrer"
+            target="_blank"
+            class="text-subtitle-1 font-weight-bold primary--text text-decoration-none"
+            >Pusat Bantuan Jabar Command Center</a
+          >.
+        </p>
+        <AlertModal v-model="showModal" :modalData="modalData"/>
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
