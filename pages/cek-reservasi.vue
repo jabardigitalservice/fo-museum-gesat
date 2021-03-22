@@ -89,28 +89,30 @@ export default {
       }
 
       try {
-        const res = await this.$axios.$get(
-          `/public/command-center-reservation/${code}`
-        );
-        if (res.data) {
-          this.reservationInfo = res.data;
-          this.showReservationInfo = true;
-        } else {
-          this.showAlert({
-            title: "Maaf, Kode Reservasi tidak ditemukan.",
-            type: "warning",
-            icon: "mdi-alert-circle-outline",
+        const res = await this.$axios
+          .$get(`/public/command-center-reservation/${code}`)
+          .catch((err) => {
+            throw new Error(err.response.status);
           });
-        }
+        this.reservationInfo = res.data;
+        this.showReservationInfo = true;
         this.loading = false;
       } catch (err) {
         this.loading = false;
         this.showReservationInfo = false;
-        this.showAlert({
-          title: "Mohon maaf, terjadi kesalahan",
-          type: "error",
-          icon: "mdi-close-circle-outline",
-        });
+        if (err.message === "404") {
+          this.showAlert({
+            title: "Mohon maaf, Kode Reservasi tidak ditemukan",
+            type: "warning",
+            icon: "mdi-alert-circle-outline",
+          });
+        } else {
+          this.showAlert({
+            title: "Mohon maaf, terjadi kesalahan",
+            type: "error",
+            icon: "mdi-close-circle-outline",
+          });
+        }
       }
     },
   },
