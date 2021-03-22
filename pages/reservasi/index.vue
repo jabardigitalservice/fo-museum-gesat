@@ -177,7 +177,8 @@
                     ></v-text-field>
                   </v-container>
                   <div class="text-h7 pa-1">
-                    Silahkan mengecek kotak masuk / spam pada email anda untuk melihat kembali
+                    Silahkan mengecek kotak masuk / spam pada email anda untuk
+                    melihat kembali
                     <b>Kode Reservasi.</b> Harap menyimpan
                     <b>Kode Reservasi</b> untuk mengetahui status permohonan
                     anda pada halaman
@@ -237,7 +238,10 @@ export default {
     dateVisitorFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
-    visitorsRules: [(v) => !!v || "Jumlah Peserta wajib diisi"],
+    visitorsRules: [
+      (v) => !!v || "Jumlah Peserta wajib diisi",
+      (v) => (v < 0 && v > 0) || "Pilih waktu kunjungan terlebih dahulu",
+    ],
     valid: false,
     recaptchaResponse: null,
     dialogSuccess: false,
@@ -302,13 +306,25 @@ export default {
         "Kuota Peserta Sisa " +
         checkAvailibility.data.data.available +
         " Orang";
-      this.visitorsRules.push(
-        (v) =>
-          (v && v <= checkAvailibility.data.data.available && v > 0) ||
-          "Jumlah Peserta Maksimum " +
-            checkAvailibility.data.data.available +
-            " Orang"
-      );
+
+      this.visitorsRules = [];
+      if (checkAvailibility.data.data.available == 0) {
+        this.visitorsRules.push(
+          (v) => !!v || "Jumlah Peserta wajib diisi",
+          (v) =>
+            (v && v <= checkAvailibility.data.data.available && v > 0) ||
+            "Kuota Penuh"
+        );
+      } else {
+        this.visitorsRules.push(
+          (v) => !!v || "Jumlah Peserta wajib diisi",
+          (v) =>
+            (v && v <= checkAvailibility.data.data.available && v > 0) ||
+            "Jumlah Peserta Maksimum " +
+              checkAvailibility.data.data.available +
+              " Orang"
+        );
+      }
     },
     formatDate(date) {
       if (!date) return null;
