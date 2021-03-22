@@ -120,7 +120,6 @@
           @change="changeVisitors(timeVisitor, dateVisitor)"
           persistent-hint
           return-object
-          single-line
         ></v-select>
         <v-text-field
           v-model="visitors"
@@ -221,7 +220,7 @@
 <script>
 export default {
   data: (vm) => ({
-    timeVisitor: null,
+    timeVisitor: {},
     reservationCode: "#",
     avalibilityVisitor: "",
     errorCaptcha: false,
@@ -282,6 +281,8 @@ export default {
     },
     async getListShift() {
       this.itemsShift = await this.$axios.$get("/command-center-shift");
+      this.timeVisitor = this.itemsShift[0];
+      this.changeVisitors(this.timeVisitor, this.dateVisitor);
     },
     allowedDates(val) {
       var dateNow = new Date();
