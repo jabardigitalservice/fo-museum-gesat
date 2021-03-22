@@ -177,7 +177,7 @@
                     ></v-text-field>
                   </v-container>
                   <div class="text-h7 pa-1">
-                    Silahkan mengecek email anda untuk melihat kembali
+                    Silahkan mengecek kotak masuk / spam pada email anda untuk melihat kembali
                     <b>Kode Reservasi.</b> Harap menyimpan
                     <b>Kode Reservasi</b> untuk mengetahui status permohonan
                     anda pada halaman
