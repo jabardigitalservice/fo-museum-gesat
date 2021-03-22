@@ -296,7 +296,7 @@ export default {
     },
     async changeVisitors(val, date) {
       var checkAvailibility = await this.$axios.get(
-        `command-center-availability?reservation_date=${date}&shift_id=${val.id}`
+        `command-center-availability?reservation_date=${date}&command_center_shift_id=${val.id}`
       );
       this.avalibilityVisitor =
         "Kuota Peserta Sisa " +
