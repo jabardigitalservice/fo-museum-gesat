@@ -206,6 +206,7 @@
           class="mb-3"
           color="success"
           type="submit"
+          :loading="loading"
           :disabled="!valid"
         >
           Kirim Permohonan
@@ -221,6 +222,7 @@
 export default {
   data: (vm) => ({
     timeVisitor: {},
+    loading: false,
     reservationCode: "#",
     avalibilityVisitor: "",
     errorCaptcha: false,
@@ -347,6 +349,7 @@ export default {
     async submitData() {
       if (this.$refs.form.validate()) {
         try {
+          this.loading = true;
           await this.$recaptcha.getResponse();
           await this.$axios
             .post(`/public/command-center-reservation`, {
@@ -366,6 +369,7 @@ export default {
               this.reservationCode = resp.data.data.reservation_code;
             })
             .catch((e) => {
+              this.loading = false;
               this.$toast.error(
                 "Terjadi kesalahan silahkan menghubungi admin",
                 {
@@ -374,7 +378,9 @@ export default {
               );
             });
           await this.$recaptcha.reset();
-        } catch (e) {}
+        } catch (e) {
+          this.loading = false;
+        }
       }
     },
     onSuccessCaptcha(token) {
