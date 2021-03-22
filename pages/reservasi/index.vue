@@ -340,7 +340,7 @@ export default {
               purpose: this.purpose,
               visitors: this.visitors,
               reservation_date: this.dateVisitor,
-              shift_id: this.timeVisitor.id,
+              command_center_shift_id: this.timeVisitor.id,
             })
             .then((resp) => {
               this.dialogSuccess = true;
