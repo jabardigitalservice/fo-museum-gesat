@@ -332,7 +332,6 @@ export default {
           this.visitorRuleNotEmpty,
           this.visitorRuleLessThanZero,
           this.visitorRuleNotFull,
-          this.avalibilityVisitor
         );
       }
     },
