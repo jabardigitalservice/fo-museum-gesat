@@ -129,7 +129,7 @@
           type="number"
           :label="labelVisitor"
           suffix="Orang"
-          :hint="avalibilityVisitor"
+          :hint="avaibilityVisitor"
         ></v-text-field>
         <v-checkbox
           v-model="agree"
@@ -263,7 +263,7 @@ export default {
         .substr(0, 10);
       return formatMaxDate;
     },
-    avalibilityVisitor () {
+    avaibilityVisitor () {
       return `Kuota Peserta Sisa ${this.availabilityCount} Orang`
     }
   },
