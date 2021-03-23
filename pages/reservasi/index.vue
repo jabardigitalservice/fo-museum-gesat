@@ -123,10 +123,11 @@
         ></v-select>
         <v-text-field
           v-model="visitors"
+          :disabled="disableVisitors"
           :rules="visitorsRules"
           class="jumlah-peserta"
           type="number"
-          label="Jumlah Peserta"
+          :label="labelVisitor"
           suffix="Orang"
           :hint="avalibilityVisitor"
         ></v-text-field>
@@ -225,6 +226,8 @@ export default {
     loading: false,
     reservationCode: "#",
     avalibilityVisitor: "",
+    labelVisitor: "Jumlah Peserta",
+    disableVisitors: false,
     errorCaptcha: false,
     itemsShift: [],
     agree: false,
@@ -318,15 +321,22 @@ export default {
       );
       this.availabilityCount = checkAvailibility.data.data.available;
       if (this.availabilityCount <= 0) {
+        this.visitors = "";
         this.visitorsRules.length = 0;
+        this.labelVisitor = "Kuota Penuh";
+        this.disableVisitors = true;
         this.visitorsRules.push(this.visitorRuleFull);
       } else {
+        this.labelVisitor = "Jumlah Peserta";
         this.visitorsRules.length = 0;
+        this.disableVisitors = false;
         this.visitorsRules.push(
           this.visitorRuleNotEmpty,
           this.visitorRuleLessThanZero,
           this.visitorRuleNotFull
         );
+        this.avalibilityVisitor =
+          "Kuota Peserta Sisa " + this.availabilityCount + " Orang";
       }
     },
     formatDate(date) {
