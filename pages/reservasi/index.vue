@@ -280,6 +280,7 @@ export default {
 
   methods: {
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
+    visitorRuleFull : (v) => !!v || "Silahkan pilih waktu kunjungan lain",
     visitorRuleNotFull(v) {
       return (
         (v && v <= this.availabilityCount) ||
@@ -324,6 +325,9 @@ export default {
         this.visitorsRules.length = 0;
         this.labelVisitor = "Kuota Penuh";
         this.disableVisitors = true;
+        this.visitorsRules.push(
+          this.visitorRuleFull
+        )
       } else {
         this.labelVisitor = "Jumlah Peserta";
         this.visitorsRules.length = 0;
