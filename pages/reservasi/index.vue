@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="5">
+    <v-col cols="12" sm="8" md="6">
       <h1 class="font-weight-bold color-header">Form Permohonan Reservasi</h1>
       <h1 class="font-weight-bold color-header pb-2">
         Kunjungan Jabar Command Center
@@ -100,6 +100,7 @@
             :min="minDates"
             :max="maxDates"
             :allowed-dates="allowedDates"
+            @change="changeVisitors(timeVisitor, dateVisitor)"
             no-title
             @input="menu1 = false"
           ></v-date-picker>
@@ -119,7 +120,6 @@
           @change="changeVisitors(timeVisitor, dateVisitor)"
           persistent-hint
           return-object
-          single-line
         ></v-select>
         <v-text-field
           v-model="visitors"
@@ -177,7 +177,8 @@
                     ></v-text-field>
                   </v-container>
                   <div class="text-h7 pa-1">
-                    Silahkan mengecek email anda untuk melihat kembali
+                    Silahkan mengecek kotak masuk / spam pada email anda untuk
+                    melihat kembali
                     <b>Kode Reservasi.</b> Harap menyimpan
                     <b>Kode Reservasi</b> untuk mengetahui status permohonan
                     anda pada halaman
@@ -205,6 +206,7 @@
           class="mb-3"
           color="success"
           type="submit"
+          :loading="loading"
           :disabled="!valid"
         >
           Kirim Permohonan
@@ -219,7 +221,8 @@
 <script>
 export default {
   data: (vm) => ({
-    timeVisitor: null,
+    timeVisitor: {},
+    loading: false,
     reservationCode: "#",
     avalibilityVisitor: "",
     errorCaptcha: false,
@@ -229,6 +232,7 @@ export default {
     nik: "",
     organization: "",
     organizationAddress: "",
+    availabilityCount: Infinity,
     phoneNumber: "",
     email: "",
     purpose: "",
@@ -237,7 +241,7 @@ export default {
     dateVisitorFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
-    visitorsRules: [(v) => !!v || "Jumlah Peserta wajib diisi"],
+    visitorsRules: [],
     valid: false,
     recaptchaResponse: null,
     dialogSuccess: false,
@@ -270,6 +274,18 @@ export default {
   },
 
   methods: {
+    visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
+    visitorRuleFull(v) {
+      return (v && v <= this.availabilityCount && v > 0) || "Kuota Penuh";
+    },
+    visitorRuleNotFull(v) {
+      return (
+        (v && v <= this.availabilityCount) ||
+        "Jumlah Peserta Maksimum " + this.availabilityCount + " Orang"
+      );
+    },
+    visitorRuleLessThanZero: (v) =>
+      (v && v > 0) || "Jumlah Peserta harus lebih dari nol",
     copyClipboard() {
       let textToCopy = this.$refs.textToCopy.$el.querySelector("input");
       textToCopy.select();
@@ -277,6 +293,8 @@ export default {
     },
     async getListShift() {
       this.itemsShift = await this.$axios.$get("/command-center-shift");
+      this.timeVisitor = this.itemsShift[0];
+      this.changeVisitors(this.timeVisitor, this.dateVisitor);
     },
     allowedDates(val) {
       var dateNow = new Date();
@@ -295,20 +313,21 @@ export default {
       return daysAllowed.indexOf(val) !== -1;
     },
     async changeVisitors(val, date) {
-      var checkAvailibility = await this.$axios.get(
+      let checkAvailibility = await this.$axios.get(
         `/command-center-availability?reservation_date=${date}&command_center_shift_id=${val.id}`
       );
-      this.avalibilityVisitor =
-        "Kuota Peserta Sisa " +
-        checkAvailibility.data.data.available +
-        " Orang";
-      this.visitorsRules.push(
-        (v) =>
-          (v && v <= checkAvailibility.data.data.available && v > 0) ||
-          "Jumlah Peserta Maksimum " +
-            checkAvailibility.data.data.available +
-            " Orang"
-      );
+      this.availabilityCount = checkAvailibility.data.data.available;
+      if (this.availabilityCount <= 0) {
+        this.visitorsRules.length = 0;
+        this.visitorsRules.push(this.visitorRuleFull);
+      } else {
+        this.visitorsRules.length = 0;
+        this.visitorsRules.push(
+          this.visitorRuleNotEmpty,
+          this.visitorRuleLessThanZero,
+          this.visitorRuleNotFull
+        );
+      }
     },
     formatDate(date) {
       if (!date) return null;
@@ -328,6 +347,7 @@ export default {
     async submitData() {
       if (this.$refs.form.validate()) {
         try {
+          this.loading = true;
           await this.$recaptcha.getResponse();
           await this.$axios
             .post(`/public/command-center-reservation`, {
@@ -347,6 +367,7 @@ export default {
               this.reservationCode = resp.data.data.reservation_code;
             })
             .catch((e) => {
+              this.loading = false;
               this.$toast.error(
                 "Terjadi kesalahan silahkan menghubungi admin",
                 {
@@ -355,7 +376,9 @@ export default {
               );
             });
           await this.$recaptcha.reset();
-        } catch (e) {}
+        } catch (e) {
+          this.loading = false;
+        }
       }
     },
     onSuccessCaptcha(token) {
