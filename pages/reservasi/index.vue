@@ -123,12 +123,13 @@
         ></v-select>
         <v-text-field
           v-model="visitors"
+          :disabled="disableVisitors"
           :rules="visitorsRules"
           class="jumlah-peserta"
           type="number"
-          label="Jumlah Peserta"
+          :label="labelVisitor"
           suffix="Orang"
-          :hint="avalibilityVisitor"
+          :hint="avaibilityVisitor"
         ></v-text-field>
         <v-checkbox
           v-model="agree"
@@ -224,7 +225,8 @@ export default {
     timeVisitor: {},
     loading: false,
     reservationCode: "#",
-    avalibilityVisitor: "",
+    labelVisitor: "Jumlah Peserta",
+    disableVisitors: false,
     errorCaptcha: false,
     itemsShift: [],
     agree: false,
@@ -261,6 +263,9 @@ export default {
         .substr(0, 10);
       return formatMaxDate;
     },
+    avaibilityVisitor () {
+      return `Kuota Peserta Sisa ${this.availabilityCount} Orang`
+    }
   },
 
   async mounted() {
@@ -275,9 +280,7 @@ export default {
 
   methods: {
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
-    visitorRuleFull(v) {
-      return (v && v <= this.availabilityCount && v > 0) || "Kuota Penuh";
-    },
+    visitorRuleFull : (v) => !!v || "Silahkan pilih waktu kunjungan lain",
     visitorRuleNotFull(v) {
       return (
         (v && v <= this.availabilityCount) ||
@@ -318,14 +321,21 @@ export default {
       );
       this.availabilityCount = checkAvailibility.data.data.available;
       if (this.availabilityCount <= 0) {
+        this.visitors = "";
         this.visitorsRules.length = 0;
-        this.visitorsRules.push(this.visitorRuleFull);
+        this.labelVisitor = "Kuota Penuh";
+        this.disableVisitors = true;
+        this.visitorsRules.push(
+          this.visitorRuleFull
+        )
       } else {
+        this.labelVisitor = "Jumlah Peserta";
         this.visitorsRules.length = 0;
+        this.disableVisitors = false;
         this.visitorsRules.push(
           this.visitorRuleNotEmpty,
           this.visitorRuleLessThanZero,
-          this.visitorRuleNotFull
+          this.visitorRuleNotFull,
         );
       }
     },
