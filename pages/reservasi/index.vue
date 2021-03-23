@@ -276,7 +276,8 @@ export default {
   },
 
   methods: {
-    avalibilityVisitor : "Kuota Peserta Sisa " + this.availabilityCount + " Orang",
+    avalibilityVisitor:
+      "Kuota Peserta Sisa " + this.availabilityCount + " Orang",
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
     visitorRuleNotFull(v) {
       return (
