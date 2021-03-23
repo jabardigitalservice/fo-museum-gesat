@@ -264,7 +264,7 @@ export default {
       return formatMaxDate;
     },
     avalibilityVisitor () {
-      return "Kuota Peserta Sisa " + this.availabilityCount + " Orang"
+      return `Kuota Peserta Sisa ${this.availabilityCount} Orang`
     }
   },
 
