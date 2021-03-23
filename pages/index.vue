@@ -16,44 +16,46 @@
       <h4 class="qs-welcome">Apa yang ingin anda lakukan ?</h4>
     </v-col>
     <v-col cols="12" sm="8" md="4" align="center">
-      <v-card
-        class="mx-auto card-ajukan"
-        color="#E6E6E6"
-        max-width="344"
-        height="150"
-        outlined
-      >
-        <v-list-item three-line>
-          <v-img src="/imghome1.svg" max-height="90" max-width="90" />
-          <v-list-item-content class="avatar-content">
-            <v-list-item-subtitle class="ajukan-title">
-              <nuxt-link class="link-reservasi" to="reservasi"
-                >Permohonan Reservasi Jabar Command Center</nuxt-link
-              >
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card>
+      <nuxt-link class="link-reservasi" to="reservasi">
+        <v-card
+          class="mx-auto card-ajukan"
+          color="#E6E6E6"
+          max-width="344"
+          height="150"
+          outlined
+        >
+          <v-list-item three-line>
+            <v-img src="/imghome1.svg" max-height="90" max-width="90" />
+            <v-list-item-content class="avatar-content">
+              <v-list-item-subtitle class="ajukan-title">
+                <strong class="link-reservasi"
+                  >Permohonan Reservasi Jabar Command Center</strong
+                >
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </nuxt-link>
     </v-col>
     <v-col cols="12" sm="8" md="4" align="center">
-      <v-card
-        class="mx-auto card-permohonan"
-        color="#E6E6E6"
-        max-width="344"
-        height="150"
-        outlined
-      >
-        <v-list-item three-line>
-          <v-img src="/imghome2.svg" max-height="90" max-width="90" />
-          <v-list-item-content class="avatar-content">
-            <v-list-item-subtitle class="ajukan-title">
-              <nuxt-link class="link-reservasi" to="cek-reservasi"
-                >Cek Status Permohonan</nuxt-link
-              >
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card>
+      <nuxt-link class="link-reservasi" to="cek-reservasi">
+        <v-card
+          class="mx-auto card-permohonan"
+          color="#E6E6E6"
+          max-width="344"
+          height="150"
+          outlined
+        >
+          <v-list-item three-line>
+            <v-img src="/imghome2.svg" max-height="90" max-width="90" />
+            <v-list-item-content class="avatar-content">
+              <v-list-item-subtitle class="ajukan-title">
+                <strong class="link-reservasi">Cek Status Permohonan</strong>
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </nuxt-link>
     </v-col>
     <v-col cols="12" align="center" sm="8" md="8">
       <h4 class="font-weight-regular pt-10">
