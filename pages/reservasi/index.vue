@@ -263,6 +263,9 @@ export default {
         .substr(0, 10);
       return formatMaxDate;
     },
+    avalibilityVisitor () {
+      return "Kuota Peserta Sisa " + this.availabilityCount + " Orang"
+    }
   },
 
   async mounted() {
@@ -276,8 +279,6 @@ export default {
   },
 
   methods: {
-    avalibilityVisitor:
-      "Kuota Peserta Sisa " + this.availabilityCount + " Orang",
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
     visitorRuleNotFull(v) {
       return (
