@@ -232,6 +232,7 @@ export default {
     nik: "",
     organization: "",
     organizationAddress: "",
+    availabilityCount: Infinity,
     phoneNumber: "",
     email: "",
     purpose: "",
@@ -240,10 +241,7 @@ export default {
     dateVisitorFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
-    visitorsRules: [
-      (v) => !!v || "Jumlah Peserta wajib diisi",
-      (v) => (v < 0 && v > 0) || "Pilih waktu kunjungan terlebih dahulu",
-    ],
+    visitorsRules: [],
     valid: false,
     recaptchaResponse: null,
     dialogSuccess: false,
@@ -276,6 +274,18 @@ export default {
   },
 
   methods: {
+    visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
+    visitorRuleFull(v) {
+      return (v && v <= this.availabilityCount && v > 0) || "Kuota Penuh";
+    },
+    visitorRuleNotFull(v) {
+      return (
+        (v && v <= this.availabilityCount) ||
+        "Jumlah Peserta Maksimum " + this.availabilityCount + " Orang"
+      );
+    },
+    visitorRuleLessThanZero: (v) =>
+      (v && v > 0) || "Jumlah Peserta harus lebih dari nol",
     copyClipboard() {
       let textToCopy = this.$refs.textToCopy.$el.querySelector("input");
       textToCopy.select();
@@ -303,31 +313,19 @@ export default {
       return daysAllowed.indexOf(val) !== -1;
     },
     async changeVisitors(val, date) {
-      var checkAvailibility = await this.$axios.get(
+      let checkAvailibility = await this.$axios.get(
         `/command-center-availability?reservation_date=${date}&command_center_shift_id=${val.id}`
       );
-      this.avalibilityVisitor =
-        "Kuota Peserta Sisa " +
-        checkAvailibility.data.data.available +
-        " Orang";
-
-      this.visitorsRules = [];
-      if (checkAvailibility.data.data.available == 0) {
-        this.visitorsRules.push(
-          (v) => !!v || "Jumlah Peserta wajib diisi",
-          (v) =>
-            (v && v <= checkAvailibility.data.data.available && v > 0) ||
-            "Kuota Penuh"
-        );
+      this.availabilityCount = checkAvailibility.data.data.available;
+      if (this.availabilityCount <= 0) {
+        this.visitorsRules.length = 0;
+        this.visitorsRules.push(this.visitorRuleFull);
       } else {
+        this.visitorsRules.length = 0;
         this.visitorsRules.push(
-          (v) => !!v || "Jumlah Peserta wajib diisi",
-          (v) =>
-            (v && v <= checkAvailibility.data.data.available) ||
-            "Jumlah Peserta Maksimum " +
-              checkAvailibility.data.data.available +
-              " Orang",
-          (v) => (v && v > 0) || "Jumlah Peserta harus lebih dari nol"
+          this.visitorRuleLessThanZero,
+          this.visitorRuleNotEmpty,
+          this.visitorRuleNotFull
         );
       }
     },
