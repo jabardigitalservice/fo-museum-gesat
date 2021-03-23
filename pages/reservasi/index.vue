@@ -225,7 +225,6 @@ export default {
     timeVisitor: {},
     loading: false,
     reservationCode: "#",
-    avalibilityVisitor: "",
     labelVisitor: "Jumlah Peserta",
     disableVisitors: false,
     errorCaptcha: false,
@@ -277,10 +276,8 @@ export default {
   },
 
   methods: {
+    avalibilityVisitor : "Kuota Peserta Sisa " + this.availabilityCount + " Orang",
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
-    visitorRuleFull(v) {
-      return (v && v <= this.availabilityCount && v > 0) || "Kuota Penuh";
-    },
     visitorRuleNotFull(v) {
       return (
         (v && v <= this.availabilityCount) ||
@@ -325,7 +322,6 @@ export default {
         this.visitorsRules.length = 0;
         this.labelVisitor = "Kuota Penuh";
         this.disableVisitors = true;
-        this.visitorsRules.push(this.visitorRuleFull);
       } else {
         this.labelVisitor = "Jumlah Peserta";
         this.visitorsRules.length = 0;
@@ -333,10 +329,9 @@ export default {
         this.visitorsRules.push(
           this.visitorRuleNotEmpty,
           this.visitorRuleLessThanZero,
-          this.visitorRuleNotFull
+          this.visitorRuleNotFull,
+          this.avalibilityVisitor
         );
-        this.avalibilityVisitor =
-          "Kuota Peserta Sisa " + this.availabilityCount + " Orang";
       }
     },
     formatDate(date) {
