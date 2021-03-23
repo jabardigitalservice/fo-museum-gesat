@@ -323,8 +323,8 @@ export default {
       } else {
         this.visitorsRules.length = 0;
         this.visitorsRules.push(
-          this.visitorRuleLessThanZero,
           this.visitorRuleNotEmpty,
+          this.visitorRuleLessThanZero,
           this.visitorRuleNotFull
         );
       }
