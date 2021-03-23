@@ -29,7 +29,7 @@
             <v-list-item-content class="avatar-content">
               <v-list-item-subtitle class="ajukan-title">
                 <strong class="link-reservasi"
-                  >Permohonan Reservasi Jabar Command Center</strong
+                  >Permohonan Reservasi</strong
                 >
               </v-list-item-subtitle>
             </v-list-item-content>
