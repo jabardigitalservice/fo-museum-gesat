@@ -263,9 +263,9 @@ export default {
         .substr(0, 10);
       return formatMaxDate;
     },
-    avaibilityVisitor () {
-      return `Kuota Peserta Sisa ${this.availabilityCount} Orang`
-    }
+    avaibilityVisitor() {
+      return `Kuota Peserta Sisa ${this.availabilityCount} Orang`;
+    },
   },
 
   async mounted() {
@@ -280,7 +280,7 @@ export default {
 
   methods: {
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
-    visitorRuleFull : (v) => !!v || "Silahkan pilih waktu kunjungan lain",
+    visitorRuleFull: (v) => !!v || "Silahkan pilih waktu kunjungan lain",
     visitorRuleNotFull(v) {
       return (
         (v && v <= this.availabilityCount) ||
@@ -316,6 +316,7 @@ export default {
       return daysAllowed.indexOf(val) !== -1;
     },
     async changeVisitors(val, date) {
+      this.$refs.form.resetValidation();
       let checkAvailibility = await this.$axios.get(
         `/command-center-availability?reservation_date=${date}&command_center_shift_id=${val.id}`
       );
@@ -325,9 +326,7 @@ export default {
         this.visitorsRules.length = 0;
         this.labelVisitor = "Kuota Penuh";
         this.disableVisitors = true;
-        this.visitorsRules.push(
-          this.visitorRuleFull
-        )
+        this.visitorsRules.push(this.visitorRuleFull);
       } else {
         this.labelVisitor = "Jumlah Peserta";
         this.visitorsRules.length = 0;
@@ -335,7 +334,7 @@ export default {
         this.visitorsRules.push(
           this.visitorRuleNotEmpty,
           this.visitorRuleLessThanZero,
-          this.visitorRuleNotFull,
+          this.visitorRuleNotFull
         );
       }
     },
