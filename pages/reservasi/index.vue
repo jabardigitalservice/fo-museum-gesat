@@ -126,6 +126,7 @@
           :disabled="disableVisitors"
           :rules="visitorsRules"
           class="jumlah-peserta"
+          ref="jumlahPeserta"
           type="number"
           :label="labelVisitor"
           suffix="Orang"
@@ -280,7 +281,6 @@ export default {
 
   methods: {
     visitorRuleNotEmpty: (v) => !!v || "Jumlah Peserta wajib diisi",
-    visitorRuleFull: (v) => !!v || "Silahkan pilih waktu kunjungan lain",
     visitorRuleNotFull(v) {
       return (
         (v && v <= this.availabilityCount) ||
@@ -316,17 +316,18 @@ export default {
       return daysAllowed.indexOf(val) !== -1;
     },
     async changeVisitors(val, date) {
+      this.visitors = "";
       this.$refs.form.resetValidation();
+      this.$refs.jumlahPeserta.focus();
       let checkAvailibility = await this.$axios.get(
         `/command-center-availability?reservation_date=${date}&command_center_shift_id=${val.id}`
       );
       this.availabilityCount = checkAvailibility.data.data.available;
       if (this.availabilityCount <= 0) {
-        this.visitors = "";
         this.visitorsRules.length = 0;
         this.labelVisitor = "Kuota Penuh";
         this.disableVisitors = true;
-        this.visitorsRules.push(this.visitorRuleFull);
+        this.visitorsRules.push(this.visitorRuleNotEmpty);
       } else {
         this.labelVisitor = "Jumlah Peserta";
         this.visitorsRules.length = 0;
