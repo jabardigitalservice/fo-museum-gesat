@@ -75,10 +75,12 @@ export default {
     },
 
     async getReservationInfo(code) {
+      let token = null;
       try {
-        await this.$recaptcha.getResponse();
+        token = await this.$recaptcha.getResponse();
         await this.$recaptcha.reset();
       } catch (error) {
+        token = null;
         this.loading = false;
         return this.showAlert({
           title: `Anda belum mencentang Captcha`,
@@ -89,7 +91,11 @@ export default {
 
       try {
         const res = await this.$axios
-          .$get(`/public/command-center-reservation/${code}`)
+          .$get(`/public/command-center-reservation/${code}`,{
+            headers: {
+              'recaptcha-token' : token,
+            }
+          })
           .catch((err) => {
             throw new Error(err.response.status);
           });
