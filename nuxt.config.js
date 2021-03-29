@@ -52,7 +52,13 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/toast',
     '@nuxtjs/recaptcha',
+    '@nuxtjs/sentry'
   ],
+
+  sentry: {
+    dsn: process.env.SENTRY_LARAVEL_DSN, // project's DSN here
+    config: {}, // Additional config
+  },
 
   recaptcha: {
     siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
@@ -63,7 +69,7 @@ export default {
   axios: {
     baseURL: process.env.API_URL
   },
-  
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
