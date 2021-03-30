@@ -135,10 +135,28 @@
         <v-checkbox
           v-model="agree"
           :rules="this.$agreeRules()"
-          label="Saya menyatakan bahwa saya menyetujui 
-          syarat dan ketentuan yang berlaku."
           required
-        ></v-checkbox>
+        >
+          <template v-slot:label>
+            <div>
+              Saya menyatakan bahwa saya menyetujui
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <a
+                    href="#"
+                    class="primary--text font-weight-medium text-decoration-none"
+                    @click.stop = "openTermsAndConditions"
+                    v-on="on"
+                  >
+                    syarat dan ketentuan
+                  </a>
+                </template>
+                Lihat syarat dan ketentuan
+              </v-tooltip>
+              yang berlaku.
+            </div>
+          </template>
+        </v-checkbox>
         <recaptcha
           class="mb-5"
           @error="onErrorCaptcha"
@@ -218,6 +236,7 @@
         </nuxt-link>
       </v-form>
     </v-col>
+    <TermsAndConditions v-model="showTerms" />
   </v-row>
 </template>
 <script>
@@ -248,6 +267,7 @@ export default {
     valid: false,
     recaptchaResponse: null,
     dialogSuccess: false,
+    showTerms: false
   }),
 
   computed: {
@@ -400,6 +420,9 @@ export default {
       this.$refs.form.reset();
       return this.$router.replace("/");
     },
+    openTermsAndConditions() {
+      this.showTerms = true;
+    }
   },
 };
 </script>
