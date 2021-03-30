@@ -58,12 +58,7 @@
       </nuxt-link>
     </v-col>
     <v-col cols="12" align="center" sm="8" md="8">
-      <h4 class="font-weight-regular pt-10">
-        Apabila anda mengalami kesulitan, silahkan menghubungi
-        <nuxt-link class="link-reservasi" to="#"
-          >Pusat Bantuan Jabar Command Center</nuxt-link
-        >
-      </h4>
+      <HelpLink/>
     </v-col>
     <v-col cols="12" sm="12" md="12"></v-col>
   </v-row>
