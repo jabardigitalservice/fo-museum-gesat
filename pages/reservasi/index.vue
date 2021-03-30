@@ -135,6 +135,7 @@
         <v-checkbox
           v-model="agree"
           :rules="this.$agreeRules()"
+          required
         >
           <template v-slot:label>
             <div>
