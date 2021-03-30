@@ -30,7 +30,7 @@
           </div>
           <div v-else>
             <p class="text-subtitle-1 font-weight-medium primary--text mb-0">
-              {{ data.value }}
+              {{ data.value ? data.value : "-" }}
             </p>
           </div>
         </v-col>

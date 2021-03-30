@@ -14,7 +14,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - reservasi-commandcenter-microsite',
-    title: 'Reservasi Command Center Microsite',
+    title: 'Reservasi Jabar Command Center',
     htmlAttrs: {
       lang: 'en'
     },
