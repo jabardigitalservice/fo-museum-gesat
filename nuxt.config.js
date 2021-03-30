@@ -60,11 +60,6 @@ export default {
     config: {}, // Additional config
   },
 
-  // recaptcha: {
-  //   siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
-  //   version: 2
-  // },
-
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: process.env.API_URL
