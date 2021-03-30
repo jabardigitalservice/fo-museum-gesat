@@ -70,6 +70,11 @@ export default {
     baseURL: process.env.API_URL
   },
 
+  env : {
+    phoneNumber : process.env.PHONE_NUMBER,
+    messages : process.env.MESSAGES,
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
