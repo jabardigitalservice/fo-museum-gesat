@@ -5,8 +5,7 @@ export default {
   publicRuntimeConfig: {
     recaptcha: {
       /* reCAPTCHA options */
-      googleRecaptchaKey: process.env.GOOGLE_RECAPTCHA_KEY,
-      secretRecaptchaKey: process.env.SECRET_RECAPTHCA_KEY
+      siteKey: process.env.GOOGLE_RECAPTCHA_KEY
     }
   },
 
@@ -62,7 +61,7 @@ export default {
 
   recaptcha: {
     siteKey: process.env.GOOGLE_RECAPTCHA_KEY,
-    version: 3
+    version: 2
   },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
