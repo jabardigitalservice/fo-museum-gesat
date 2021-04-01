@@ -383,7 +383,7 @@ export default {
           await this.$axios
             .post(`/public/command-center-reservation`, {
               headers: {
-                'g-recaptcha-response' : token,
+                'recaptcha-token' : token,
               },
               name: this.name,
               nik: this.nik,
