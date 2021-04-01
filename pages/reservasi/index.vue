@@ -421,8 +421,7 @@ export default {
     closeDialog() {
       this.dialogSuccess = false;
       this.errorCaptcha = false;
-      this.$refs.form.reset();
-      return this.$router.replace("/");
+      this.$router.push("/");
     },
     openTermsAndConditions() {
       this.showTerms = true;
