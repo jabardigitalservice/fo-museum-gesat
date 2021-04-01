@@ -379,9 +379,12 @@ export default {
       if (this.$refs.form.validate()) {
         try {
           this.loading = true;
-          await this.$recaptcha.getResponse();
+          let token = await this.$recaptcha.getResponse();
           await this.$axios
             .post(`/public/command-center-reservation`, {
+              headers: {
+                'g-recaptcha-response' : token,
+              },
               name: this.name,
               nik: this.nik,
               organization_name: this.organization,
