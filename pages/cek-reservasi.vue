@@ -12,7 +12,7 @@
               type="text"
               v-model="reservationCode"
               :rules="rules"
-              placeholder="contoh: JCC0000000001"
+              placeholder="contoh: JCCXXXX"
               required
               class="mb-4"
             />
