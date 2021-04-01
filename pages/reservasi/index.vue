@@ -110,11 +110,11 @@
           :rules="this.$timeVisitorRules()"
           :hint="
             timeVisitor != null
-              ? `${timeVisitor.code}, Kapasitas ${timeVisitor.capacity} Orang`
+              ? `${timeVisitor.name}, Kapasitas ${timeVisitor.capacity} Orang`
               : ''
           "
           :items="itemsShift"
-          item-text="name"
+          item-text="time"
           item-value="id"
           label="Waktu Kunjungan"
           @change="changeVisitors(timeVisitor, dateVisitor)"
@@ -315,8 +315,9 @@ export default {
       document.execCommand("copy");
     },
     async getListShift() {
-      this.itemsShift = await this.$axios.$get("/command-center-shift");
-      this.timeVisitor = this.itemsShift[0];
+      const dataShift  = await this.$axios.$get("/command-center-shift");
+      this.itemsShift  = dataShift.data;
+      this.timeVisitor = dataShift.data[0];
       this.changeVisitors(this.timeVisitor, this.dateVisitor);
     },
     allowedDates(val) {
@@ -378,9 +379,12 @@ export default {
       if (this.$refs.form.validate()) {
         try {
           this.loading = true;
-          await this.$recaptcha.getResponse();
+          let token = await this.$recaptcha.getResponse();
           await this.$axios
             .post(`/public/command-center-reservation`, {
+              headers: {
+                'recaptcha-token' : token,
+              },
               name: this.name,
               nik: this.nik,
               organization_name: this.organization,
