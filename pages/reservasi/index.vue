@@ -315,7 +315,7 @@ export default {
       document.execCommand("copy");
     },
     async getListShift() {
-      const dataShift  = await this.$axios.$get("/command-center-shift");
+      const dataShift  = await this.$axios.$get("/command-center-shift?sortBy=time&orderDirection=asc&status=ACTIVE");
       this.itemsShift  = dataShift.data;
       this.timeVisitor = dataShift.data[0];
       this.changeVisitors(this.timeVisitor, this.dateVisitor);
