@@ -45,8 +45,8 @@ export default {
       rules: [
         (code) => !!code || "Kode Reservasi tidak boleh kosong",
         (code) =>
-          code.length <= 13 ||
-          "Kode Reservasi tidak boleh melebihi 13 karakter",
+          code.length <= 7 ||
+          "Kode Reservasi tidak boleh melebihi 7 karakter",
       ],
       showModal: false,
       modalData: {},
