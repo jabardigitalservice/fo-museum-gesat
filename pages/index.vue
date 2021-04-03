@@ -35,7 +35,7 @@
         </v-card>
       </nuxt-link>
     </v-col>
-    <v-col cols="12" sm="12" md="6" class="mb-2" sm-justify="center">
+    <v-col cols="12" sm="12" md="6" class="mb-2">
       <nuxt-link class="link-reservasi" to="cek-reservasi">
         <v-card
           class="card-permohonan drop-shadow"
