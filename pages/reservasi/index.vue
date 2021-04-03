@@ -5,7 +5,6 @@
       <h2 class="text-subtitle-1 darkgray--text mb-8 font-weight-medium">
         Harap mengisi data dibawah ini dengan sebenar-benarnya
       </h2>
-      <div class="pt-8"></div>
       <v-form
         ref="form"
         v-on:submit.prevent="submitData()"
