@@ -1,13 +1,12 @@
 <template>
-<v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="mt-16">
+<v-row>
+    <v-col cols="12" class="mt-16">
         <h1 class="text-h5 text-md-h4 font-weight-medium mb-10 primary--text">
           Cek Status Permohonan Reservasi
           <wbr>Jabar Command Center</wbr>
         </h1>
         <v-form @submit="onFormSubmit" class="mb-12" lazy-validation ref="form">
-          <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
+          <label class="text-subtitle-1 font-weight-medium darkgray--text">Kode Reservasi </label>
             <v-text-field
               type="text"
               v-model="reservationCode"
@@ -26,7 +25,6 @@
         </section>
         <HelpLink/>
         <AlertModal v-model="showModal" :modalData="modalData"/>
-      </div>
     </v-col>
   </v-row>
 </template>

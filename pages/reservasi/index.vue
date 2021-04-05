@@ -1,14 +1,10 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <h1 class="font-weight-bold color-header">Form Permohonan Reservasi</h1>
-      <h1 class="font-weight-bold color-header pb-2">
-        Kunjungan Jabar Command Center
-      </h1>
-      <h4 class="font-weight-regular">
+  <v-row>
+    <v-col cols="12" class="mt-16">
+      <h1 class="text-h5 text-md-h4 font-weight-medium mb-6 primary--text">Form Permohonan Reservasi <br>Kunjungan Jabar Command Center</h1>
+      <h2 class="text-subtitle-1 darkgray--text mb-8 font-weight-medium">
         Harap mengisi data dibawah ini dengan sebenar-benarnya
-      </h4>
-      <div class="pt-8"></div>
+      </h2>
       <v-form
         ref="form"
         v-on:submit.prevent="submitData()"
@@ -93,6 +89,7 @@
               v-bind="attrs"
               @blur="dateVisitor = parseDate()"
               v-on="on"
+              class="mb-8"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -103,6 +100,7 @@
             @change="changeVisitors(timeVisitor, dateVisitor)"
             no-title
             @input="menu1 = false"
+            class="mb-8"
           ></v-date-picker>
         </v-menu>
         <v-select
@@ -120,6 +118,7 @@
           @change="changeVisitors(timeVisitor, dateVisitor)"
           persistent-hint
           return-object
+          class="mb-8"
         ></v-select>
         <v-text-field
           v-model="visitors"
