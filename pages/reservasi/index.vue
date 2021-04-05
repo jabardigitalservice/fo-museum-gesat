@@ -315,7 +315,7 @@ export default {
       document.execCommand("copy");
     },
     async getListShift() {
-      const dataShift  = await this.$axios.$get("/command-center-shift");
+      const dataShift  = await this.$axios.$get("/command-center-shift?sortBy=time&orderDirection=asc&status=ACTIVE");
       this.itemsShift  = dataShift.data;
       this.timeVisitor = dataShift.data[0];
       this.changeVisitors(this.timeVisitor, this.dateVisitor);
@@ -421,8 +421,7 @@ export default {
     closeDialog() {
       this.dialogSuccess = false;
       this.errorCaptcha = false;
-      this.$refs.form.reset();
-      return this.$router.replace("/");
+      this.$router.push("/");
     },
     openTermsAndConditions() {
       this.showTerms = true;
