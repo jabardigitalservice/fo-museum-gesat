@@ -26,7 +26,7 @@ export default {
         name: 'description',
         content: `Platform Reservasi Kunjungan Jabar Command Center.
         Anda dapat mengajukan permohonan kunjungan dengan mengisi data diri pada Form Permohonan Kunjungan,
-        atau mengecek status permohonan anda pada halaman Cek Status Permohonan.`
+        atau mengecek status permohonan Anda pada halaman Cek Status Permohonan.`
       }
     ],
     link: [
