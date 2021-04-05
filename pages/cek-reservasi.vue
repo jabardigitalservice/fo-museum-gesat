@@ -12,7 +12,7 @@
               type="text"
               v-model="reservationCode"
               :rules="rules"
-              placeholder="contoh: JCC0000000001"
+              placeholder="contoh: JCCXXXX"
               required
               class="mb-4"
             />
@@ -45,8 +45,8 @@ export default {
       rules: [
         (code) => !!code || "Kode Reservasi tidak boleh kosong",
         (code) =>
-          code.length <= 13 ||
-          "Kode Reservasi tidak boleh melebihi 13 karakter",
+          code.length <= 7 ||
+          "Kode Reservasi tidak boleh melebihi 7 karakter",
       ],
       showModal: false,
       modalData: {},
