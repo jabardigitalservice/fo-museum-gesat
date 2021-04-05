@@ -21,7 +21,13 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      {
+        hid: 'description',
+        name: 'description',
+        content: `Platform Reservasi Kunjungan Jabar Command Center.
+        Anda dapat mengajukan permohonan kunjungan dengan mengisi data diri pada Form Permohonan Kunjungan,
+        atau mengecek status permohonan anda pada halaman Cek Status Permohonan.`
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/logojcc.ico' }
@@ -65,9 +71,9 @@ export default {
     baseURL: process.env.API_URL
   },
 
-  env : {
-    phoneNumber : process.env.PHONE_NUMBER,
-    messages : process.env.MESSAGES,
+  env: {
+    phoneNumber: process.env.PHONE_NUMBER,
+    messages: process.env.MESSAGES,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
