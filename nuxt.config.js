@@ -13,7 +13,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Reservasi Jabar Command Center',
+    title: 'Reservasi Kunjungan Jabar Command Center',
     htmlAttrs: {
       lang: 'en'
     },
