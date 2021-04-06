@@ -1,0 +1,107 @@
+@media (min-width: 960px) {
+    .col-md-6.ajukan-permohonan{
+        padding-left: 250px;
+    }
+    .col-md-6.cek-permohonan{
+        padding-right: 250px;
+    }
+    .h-welcome {
+        margin-top: 100px;
+        color : #1976d2;
+    }
+}
+
+@media (min-width: 1920px) {
+    .col-md-6.ajukan-permohonan{
+        padding-left: 370px;
+    }
+    .col-md-6.cek-permohonan{
+        padding-right: 370px;
+    }
+}
+
+@media (max-width: 960px) {
+    .h-welcome {
+        margin-top: 50px;
+        color :#1976d2;
+    }
+}
+
+.v-app-bar.nav-logo {
+    height: 90px !important;
+    padding: 10px;
+    background: #FFFFFF !important;
+}
+
+.v-text-field.jumlah-peserta{
+    width: 200px;
+}
+
+.btn-batalkan {
+    text-decoration: none;
+}
+
+.sb-welcome {
+    font-weight: 400;
+    font-style:normal;
+    font-size: 16px;
+}
+
+.qs-welcome {
+    margin-top: 40px;
+}
+
+.ajukan-title {
+    color:rgb(26 152 213) !important;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.avatar-home {
+    margin-left: 20px;
+    padding: 30px;
+}
+
+.avatar-content {
+    margin-left: 10px;
+}
+
+.card-ajukan {
+    padding-top: 30px;
+    background-color: #FFFFFF !important;
+}
+
+.card-ajukan:hover{
+  transition: all 350ms ease-in-out;
+  transform: scale(1.05);
+}
+
+.card-permohonan {
+    padding-top: 30px;
+    background-color: #FFFFFF !important;
+}
+
+.card-permohonan:hover{
+  transition: all 350ms ease-in-out;
+  transform: scale(1.05);
+}
+
+.link-reservasi {
+    text-decoration: none;
+    color : #1976d2;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 180%;
+}
+
+.success-dialog { font-size: 100px !important; }
+/* .text-h5.pa-5 { color: #388E3C !important; } */
+.color-header { color: #1976d2 }
+.pt-8 { padding-top: 80px }
+.pt-100 { padding-top: 80px; }
+
+.drop-shadow{
+  box-shadow: 0px 0px 25px -1px rgba(0, 0, 0, 0.12);
+}
+

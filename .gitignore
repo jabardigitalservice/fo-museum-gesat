@@ -88,3 +88,11 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Json-server data
+data/
+
+# packaged.json and yarn.lock
+package.json
+package-lock.json
+yarn.lock
