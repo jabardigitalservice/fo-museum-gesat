@@ -381,9 +381,6 @@ export default {
           let token = await this.$recaptcha.getResponse();
           await this.$axios
             .post(`/public/command-center-reservation`, {
-              headers: {
-                'recaptcha-token' : token,
-              },
               name: this.name,
               nik: this.nik,
               organization_name: this.organization,
@@ -394,7 +391,13 @@ export default {
               visitors: this.visitors,
               reservation_date: this.dateVisitor,
               command_center_shift_id: this.timeVisitor.id,
-            })
+            },
+            {
+              headers: {
+                'recaptcha-token' : token,
+              },
+            },
+            )
             .then((resp) => {
               this.dialogSuccess = true;
               this.reservationCode = resp.data.data.reservation_code;
