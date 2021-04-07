@@ -87,7 +87,7 @@
               v-model="dateVisitorFormat"
               :rules="dateVisitorRules"
               label="Tanggal Kunjungan *"
-              hint="Bulan/Hari/Tahun"
+              hint="Hari Bulan Tahun"
               persistent-hint
               prepend-icon="mdi-calendar"
               v-bind="attrs"
@@ -240,8 +240,9 @@
   </v-row>
 </template>
 <script>
+import { momentFormatDateId } from "../../utils";
 export default {
-  data: (vm) => ({
+  data: () => ({
     timeVisitor: {},
     loading: false,
     reservationCode: "#",
@@ -260,7 +261,7 @@ export default {
     purpose: "",
     dateVisitor: new Date().toISOString().substr(0, 10),
     dateVisitorRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
-    dateVisitorFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
+    dateVisitorFormat: momentFormatDateId(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
     visitorsRules: [],
@@ -295,7 +296,7 @@ export default {
 
   watch: {
     dateVisitor() {
-      this.dateVisitorFormat = this.formatDate(this.dateVisitor);
+      this.dateVisitorFormat = momentFormatDateId(this.dateVisitor);
     },
   },
 
