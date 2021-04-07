@@ -132,11 +132,7 @@
           suffix="Orang"
           :hint="avaibilityVisitor"
         ></v-text-field>
-        <v-checkbox
-          v-model="agree"
-          :rules="this.$agreeRules()"
-          required
-        >
+        <v-checkbox v-model="agree" :rules="this.$agreeRules()" required>
           <template v-slot:label>
             <div>
               Saya menyatakan bahwa saya menyetujui
@@ -145,7 +141,7 @@
                   <a
                     href="#"
                     class="primary--text font-weight-medium text-decoration-none"
-                    @click.stop = "openTermsAndConditions"
+                    @click.stop="openTermsAndConditions"
                     v-on="on"
                   >
                     syarat dan ketentuan
@@ -233,7 +229,7 @@
         </nuxt-link>
       </v-form>
     </v-col>
-    <AlertModal v-model="showModal" :modalData="modalData"/>
+    <AlertModal v-model="showModal" :modalData="modalData" />
     <TermsAndConditions v-model="showTerms" />
   </v-row>
 </template>
@@ -259,7 +255,9 @@ export default {
     purpose: "",
     dateVisitor: new Date().toISOString().substr(0, 10),
     dateVisitorRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
-    dateVisitorFormat: momentFormatDateId(new Date().toISOString().substr(0, 10)),
+    dateVisitorFormat: momentFormatDateId(
+      new Date().toISOString().substr(0, 10)
+    ),
     menu1: false,
     visitors: "",
     showModal: false,
@@ -268,7 +266,7 @@ export default {
     valid: false,
     recaptchaResponse: null,
     dialogSuccess: false,
-    showTerms: false
+    showTerms: false,
   }),
 
   computed: {
@@ -316,8 +314,10 @@ export default {
       document.execCommand("copy");
     },
     async getListShift() {
-      const dataShift  = await this.$axios.$get("/command-center-shift?sortBy=time&orderDirection=asc&status=ACTIVE");
-      this.itemsShift  = dataShift.data;
+      const dataShift = await this.$axios.$get(
+        "/command-center-shift?sortBy=time&orderDirection=asc&status=ACTIVE"
+      );
+      this.itemsShift = dataShift.data;
       this.timeVisitor = dataShift.data[0];
       this.changeVisitors(this.timeVisitor, this.dateVisitor);
     },
@@ -392,7 +392,7 @@ export default {
           await this.$axios
             .post(`/public/command-center-reservation`, {
               headers: {
-                'recaptcha-token' : token,
+                "recaptcha-token": token,
               },
               name: this.name,
               nik: this.nik,
@@ -433,7 +433,7 @@ export default {
     },
     openTermsAndConditions() {
       this.showTerms = true;
-    }
+    },
   },
 };
 </script>
