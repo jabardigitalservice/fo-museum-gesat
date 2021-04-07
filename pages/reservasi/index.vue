@@ -162,9 +162,6 @@
           @error="onErrorCaptcha"
           @success="onSuccessCaptcha"
         />
-        <v-alert dense outlined type="error" v-model="errorCaptcha">
-          <strong>Captcha Wajib di isi !!</strong>
-        </v-alert>
         <v-dialog
           persistent
           v-model="dialogSuccess"
@@ -236,6 +233,7 @@
         </nuxt-link>
       </v-form>
     </v-col>
+    <AlertModal v-model="showModal" :modalData="modalData"/>
     <TermsAndConditions v-model="showTerms" />
   </v-row>
 </template>
@@ -264,6 +262,8 @@ export default {
     dateVisitorFormat: momentFormatDateId(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
+    showModal: false,
+    modalData: {},
     visitorsRules: [],
     valid: false,
     recaptchaResponse: null,
@@ -374,7 +374,15 @@ export default {
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     },
     onErrorCaptcha() {
-      this.errorCaptcha = true;
+      return this.showAlert({
+        title: `Anda belum mencentang Captcha`,
+        type: "warning",
+        icon: "mdi-alert-circle-outline",
+      });
+    },
+    showAlert(alert) {
+      this.modalData = alert;
+      this.showModal = true;
     },
     async submitData() {
       if (this.$refs.form.validate()) {
