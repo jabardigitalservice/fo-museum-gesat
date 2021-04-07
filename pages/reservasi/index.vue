@@ -1,7 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12" class="mt-16">
-      <h1 class="text-h5 text-md-h4 font-weight-medium mb-6 primary--text">Form Permohonan Reservasi <br>Kunjungan Jabar Command Center</h1>
+      <h1 class="text-h5 text-md-h4 font-weight-medium mb-6 primary--text">
+        Form Permohonan Reservasi <br />Kunjungan Jabar Command Center
+      </h1>
       <h2 class="text-subtitle-1 darkgray--text mb-8 font-weight-medium">
         Harap mengisi data dibawah ini dengan sebenar-benarnya
       </h2>
@@ -254,9 +256,7 @@ export default {
     purpose: "",
     dateVisitor: new Date().toISOString().substr(0, 10),
     dateVisitorRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
-    dateVisitorFormat: formatedDate(
-      new Date().toISOString().substr(0, 10)
-    ),
+    dateVisitorFormat: formatedDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
     showModal: false,
@@ -389,23 +389,25 @@ export default {
           this.loading = true;
           let token = await this.$recaptcha.getResponse();
           await this.$axios
-            .post(`/public/command-center-reservation`, {
-              name: this.name,
-              nik: this.nik,
-              organization_name: this.organization,
-              address: this.organizationAddress,
-              phone_number: this.phoneNumber,
-              email: this.email,
-              purpose: this.purpose,
-              visitors: this.visitors,
-              reservation_date: this.dateVisitor,
-              command_center_shift_id: this.timeVisitor.id,
-            },
-            {
-              headers: {
-                'recaptcha-token' : token,
+            .post(
+              `/public/command-center-reservation`,
+              {
+                name: this.name,
+                nik: this.nik,
+                organization_name: this.organization,
+                address: this.organizationAddress,
+                phone_number: this.phoneNumber,
+                email: this.email,
+                purpose: this.purpose,
+                visitors: this.visitors,
+                reservation_date: this.dateVisitor,
+                command_center_shift_id: this.timeVisitor.id,
               },
-            },
+              {
+                headers: {
+                  "recaptcha-token": token,
+                },
+              }
             )
             .then((resp) => {
               this.dialogSuccess = true;
