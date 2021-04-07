@@ -233,7 +233,7 @@
   </v-row>
 </template>
 <script>
-import { momentFormatDateId } from "../../utils";
+import { formatedDate } from "../../utils/formatedDate";
 export default {
   data: () => ({
     timeVisitor: {},
@@ -254,7 +254,7 @@ export default {
     purpose: "",
     dateVisitor: new Date().toISOString().substr(0, 10),
     dateVisitorRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
-    dateVisitorFormat: momentFormatDateId(
+    dateVisitorFormat: formatedDate(
       new Date().toISOString().substr(0, 10)
     ),
     menu1: false,
@@ -293,7 +293,7 @@ export default {
 
   watch: {
     dateVisitor() {
-      this.dateVisitorFormat = momentFormatDateId(this.dateVisitor);
+      this.dateVisitorFormat = formatedDate(this.dateVisitor);
     },
   },
 
