@@ -411,12 +411,11 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$toast.error(
-                "Terjadi kesalahan silahkan menghubungi admin",
-                {
-                  duration: 5000,
-                }
-              );
+              this.showAlert({
+                title: "Mohon maaf, terjadi kesalahan",
+                type: "error",
+                icon: "mdi-close-circle-outline",
+              });
             });
           await this.$recaptcha.reset();
         } catch (e) {
