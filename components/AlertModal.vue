@@ -11,16 +11,7 @@
           <p class="title" :style="{'word-break' : 'normal'}">{{ modalData.title }}</p>
         </v-card-title>
         <v-card-subtitle class="text-center">
-          <p class="text-subtitle-2">
-            Silakan menghubungi
-            <a
-              class="font-weight-bold text-decoration-none primary--text"
-              href="#"
-              rel="noopener noreferrer"
-              ><wbr>Pusat Bantuan Jabar Command Center</wbr></a
-            >
-            <wbr>apabila anda membutuhkan bantuan</wbr>
-          </p>
+          <HelpLink/>
         </v-card-subtitle>
         <v-card-actions class="text-center justify-center">
           <v-btn @click.stop="show = false" :class="getButtonClass"

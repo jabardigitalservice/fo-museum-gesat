@@ -1,18 +1,17 @@
 <template>
-<v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="mt-16">
+<v-row>
+    <v-col cols="12" class="mt-16">
         <h1 class="text-h5 text-md-h4 font-weight-medium mb-10 primary--text">
           Cek Status Permohonan Reservasi
           <wbr>Jabar Command Center</wbr>
         </h1>
         <v-form @submit="onFormSubmit" class="mb-12" lazy-validation ref="form">
-          <label class="text-subtitle-1 font-weight-medium">Kode Reservasi </label>
+          <label class="text-subtitle-1 font-weight-medium darkgray--text">Kode Reservasi </label>
             <v-text-field
               type="text"
               v-model="reservationCode"
               :rules="rules"
-              placeholder="contoh: JCC0000000001"
+              placeholder="contoh: JCCXXXX"
               required
               class="mb-4"
             />
@@ -26,7 +25,6 @@
         </section>
         <HelpLink/>
         <AlertModal v-model="showModal" :modalData="modalData"/>
-      </div>
     </v-col>
   </v-row>
 </template>
@@ -45,8 +43,8 @@ export default {
       rules: [
         (code) => !!code || "Kode Reservasi tidak boleh kosong",
         (code) =>
-          code.length <= 13 ||
-          "Kode Reservasi tidak boleh melebihi 13 karakter",
+          code.length <= 7 ||
+          "Kode Reservasi tidak boleh melebihi 7 karakter",
       ],
       showModal: false,
       modalData: {},

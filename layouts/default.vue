@@ -14,7 +14,11 @@
     </v-app-bar>
     <v-main>
       <v-container>
-        <nuxt class="pt-10 pb-10" />
+        <v-row no-gutters justify="center">
+          <v-col cols="12" sm="10" md="10" lg="8" xl="6">
+            <nuxt class="pt-10 pb-10" />
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
   </v-app>
