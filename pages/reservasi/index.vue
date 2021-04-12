@@ -1,7 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12" class="mt-16">
-      <h1 class="text-h5 text-md-h4 font-weight-medium mb-6 primary--text">Form Permohonan Reservasi <br>Kunjungan Jabar Command Center</h1>
+      <h1 class="text-h5 text-md-h4 font-weight-medium mb-6 primary--text">
+        Form Permohonan Reservasi <br />Kunjungan Jabar Command Center
+      </h1>
       <h2 class="text-subtitle-1 darkgray--text mb-8 font-weight-medium">
         Harap mengisi data dibawah ini dengan sebenar-benarnya
       </h2>
@@ -83,7 +85,7 @@
               v-model="dateVisitorFormat"
               :rules="dateVisitorRules"
               label="Tanggal Kunjungan *"
-              hint="Bulan/Hari/Tahun"
+              hint="Hari Bulan Tahun"
               persistent-hint
               prepend-icon="mdi-calendar"
               v-bind="attrs"
@@ -131,11 +133,7 @@
           suffix="Orang"
           :hint="avaibilityVisitor"
         ></v-text-field>
-        <v-checkbox
-          v-model="agree"
-          :rules="this.$agreeRules()"
-          required
-        >
+        <v-checkbox v-model="agree" :rules="this.$agreeRules()" required>
           <template v-slot:label>
             <div>
               Saya menyatakan bahwa saya menyetujui
@@ -144,7 +142,7 @@
                   <a
                     href="#"
                     class="primary--text font-weight-medium text-decoration-none"
-                    @click.stop = "openTermsAndConditions"
+                    @click.stop="openTermsAndConditions"
                     v-on="on"
                   >
                     syarat dan ketentuan
@@ -161,9 +159,6 @@
           @error="onErrorCaptcha"
           @success="onSuccessCaptcha"
         />
-        <v-alert dense outlined type="error" v-model="errorCaptcha">
-          <strong>Captcha Wajib di isi !!</strong>
-        </v-alert>
         <v-dialog
           persistent
           v-model="dialogSuccess"
@@ -235,12 +230,14 @@
         </nuxt-link>
       </v-form>
     </v-col>
+    <AlertModal v-model="showModal" :modalData="modalData" />
     <TermsAndConditions v-model="showTerms" />
   </v-row>
 </template>
 <script>
+import { formatedDate } from "../../utils/formatedDate";
 export default {
-  data: (vm) => ({
+  data: () => ({
     timeVisitor: {},
     loading: false,
     reservationCode: "#",
@@ -259,14 +256,16 @@ export default {
     purpose: "",
     dateVisitor: new Date().toISOString().substr(0, 10),
     dateVisitorRules: [(v) => !!v || "Tanggal Kunjungan wajib diisi"],
-    dateVisitorFormat: vm.formatDate(new Date().toISOString().substr(0, 10)),
+    dateVisitorFormat: formatedDate(new Date().toISOString().substr(0, 10)),
     menu1: false,
     visitors: "",
+    showModal: false,
+    modalData: {},
     visitorsRules: [],
     valid: false,
     recaptchaResponse: null,
     dialogSuccess: false,
-    showTerms: false
+    showTerms: false,
   }),
 
   computed: {
@@ -294,7 +293,7 @@ export default {
 
   watch: {
     dateVisitor() {
-      this.dateVisitorFormat = this.formatDate(this.dateVisitor);
+      this.dateVisitorFormat = formatedDate(this.dateVisitor);
     },
   },
 
@@ -314,8 +313,10 @@ export default {
       document.execCommand("copy");
     },
     async getListShift() {
-      const dataShift  = await this.$axios.$get("/command-center-shift?sortBy=time&orderDirection=asc&status=ACTIVE");
-      this.itemsShift  = dataShift.data;
+      const dataShift = await this.$axios.$get(
+        "/command-center-shift?sortBy=time&orderDirection=asc&status=ACTIVE"
+      );
+      this.itemsShift = dataShift.data;
       this.timeVisitor = dataShift.data[0];
       this.changeVisitors(this.timeVisitor, this.dateVisitor);
     },
@@ -372,7 +373,15 @@ export default {
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     },
     onErrorCaptcha() {
-      this.errorCaptcha = true;
+      return this.showAlert({
+        title: `Anda belum mencentang Captcha`,
+        type: "warning",
+        icon: "mdi-alert-circle-outline",
+      });
+    },
+    showAlert(alert) {
+      this.modalData = alert;
+      this.showModal = true;
     },
     async submitData() {
       if (this.$refs.form.validate()) {
@@ -380,23 +389,25 @@ export default {
           this.loading = true;
           let token = await this.$recaptcha.getResponse();
           await this.$axios
-            .post(`/public/command-center-reservation`, {
-              name: this.name,
-              nik: this.nik,
-              organization_name: this.organization,
-              address: this.organizationAddress,
-              phone_number: this.phoneNumber,
-              email: this.email,
-              purpose: this.purpose,
-              visitors: this.visitors,
-              reservation_date: this.dateVisitor,
-              command_center_shift_id: this.timeVisitor.id,
-            },
-            {
-              headers: {
-                'recaptcha-token' : token,
+            .post(
+              `/public/command-center-reservation`,
+              {
+                name: this.name,
+                nik: this.nik,
+                organization_name: this.organization,
+                address: this.organizationAddress,
+                phone_number: this.phoneNumber,
+                email: this.email,
+                purpose: this.purpose,
+                visitors: this.visitors,
+                reservation_date: this.dateVisitor,
+                command_center_shift_id: this.timeVisitor.id,
               },
-            },
+              {
+                headers: {
+                  "recaptcha-token": token,
+                },
+              }
             )
             .then((resp) => {
               this.dialogSuccess = true;
@@ -404,12 +415,11 @@ export default {
             })
             .catch((e) => {
               this.loading = false;
-              this.$toast.error(
-                "Terjadi kesalahan silahkan menghubungi admin",
-                {
-                  duration: 5000,
-                }
-              );
+              this.showAlert({
+                title: "Mohon maaf, terjadi kesalahan",
+                type: "error",
+                icon: "mdi-close-circle-outline",
+              });
             });
           await this.$recaptcha.reset();
         } catch (e) {
@@ -427,7 +437,7 @@ export default {
     },
     openTermsAndConditions() {
       this.showTerms = true;
-    }
+    },
   },
 };
 </script>
