@@ -30,7 +30,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/logojcc.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/logomgs.ico' }
     ]
   },
 
