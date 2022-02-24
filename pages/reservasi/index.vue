@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12" class="mt-16">
       <h1 class="text-h5 text-md-h4 font-weight-medium mb-6 primary--text">
-        Form Permohonan Reservasi <br />Kunjungan Jabar Command Center
+        Form Permohonan Reservasi <br />Kunjungan Museum Gedung Sate
       </h1>
       <h2 class="text-subtitle-1 darkgray--text mb-8 font-weight-medium">
         Harap mengisi data dibawah ini dengan sebenar-benarnya

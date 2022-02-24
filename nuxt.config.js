@@ -13,8 +13,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - reservasi-commandcenter-microsite',
-    title: 'Reservasi Jabar Command Center',
+    titleTemplate: '%s - Reservasi Museum Gedung Sate',
+    title: 'Reservasi Museum Gedung Sate',
     htmlAttrs: {
       lang: 'en'
     },
@@ -24,7 +24,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: `Platform Reservasi Kunjungan Jabar Command Center.
+        content: `Platform Reservasi Kunjungan Museum Gedung Sate.
         Anda dapat mengajukan permohonan kunjungan dengan mengisi data diri pada Form Permohonan Kunjungan,
         atau mengecek status permohonan Anda pada halaman Cek Status Permohonan.`
       }
