@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-
+  ssr: false,
   publicRuntimeConfig: {
     recaptcha: {
       /* reCAPTCHA options */
@@ -30,7 +30,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/logojcc.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/logomgs.ico' }
     ]
   },
 

@@ -4,10 +4,10 @@
       <v-spacer></v-spacer>
       <nuxt-link to="/">
         <v-img
-          src="/logojcc.svg"
-          alt="Jabar Command Center"
-          max-height="80"
-          max-width="80"
+          src="/MGS_LOGO.png"
+          alt="Museum Gedung Sate"
+          max-height="120"
+          max-width="120"
         />
       </nuxt-link>
       <v-spacer />
