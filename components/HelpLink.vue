@@ -6,7 +6,7 @@
       :href="`https://wa.me/${phoneNumber}?text=${messages}`"
       rel="noopener noreferrer"
       class="text-subtitle-1 font-weight-bold primary--text text-decoration-none"
-      >Pusat Bantuan Jabar Command Center</a
+      >Pusat Bantuan Museum Gedung sate</a
     >.
   </p>
 </template>

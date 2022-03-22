@@ -3,7 +3,7 @@
     <v-col cols="12" class="mt-16">
       <h1 class="text-h5 text-md-h4 font-weight-medium mb-4 primary--text">Halo Selamat Datang,</h1>
       <h2 class="text-subtitle-1 darkgray--text mb-8">
-        Anda berada di halaman Reservasi Kunjungan <b>Jabar Command Center</b>.
+        Anda berada di halaman Reservasi Kunjungan <b>Museum Gedung Sate</b>.
         Anda dapat mengajukan permohonan kunjungan dengan mengisi data diri pada
         <nuxt-link class="link-reservasi" to="reservasi"
           >Form Permohonan Kunjungan</nuxt-link

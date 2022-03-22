@@ -4,8 +4,8 @@
       <v-card-title class="primary--text mb-2"> Syarat dan Ketentuan </v-card-title>
       <v-card-text class="text-subtitle-1">
         <p class="mb-2">
-          Jabar Command Center merupakan fasilitas publik yang dikelola oleh
-          Pemerintah Provinsi Jawa Barat. Saat ini Jabar Command Center menerapkan pembatasan berupa kuota
+          Museum Gedung Sate merupakan fasilitas publik yang dikelola oleh
+          Pemerintah Provinsi Jawa Barat. Saat ini Museum Gedung Sate menerapkan pembatasan berupa kuota
           kunjungan sebagai bagian dari adaptasi kebiasaan baru dan penerapan
           protokol kesehatan.
         </p>
